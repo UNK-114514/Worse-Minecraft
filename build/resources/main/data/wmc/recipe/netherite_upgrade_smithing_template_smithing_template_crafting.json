@@ -1,0 +1,13 @@
+{
+  "type": "wmc:smithing_template_crafting_recipe_serializer",
+  "base_template": {
+    "item": "wmc:netherite_upgrade_smithing_core"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "template_core": {
+    "item": "wmc:netherrack_base_smithing_template"
+  }
+}

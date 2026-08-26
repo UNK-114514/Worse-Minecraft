@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wmc:flow_armor_trim_smithing_core"
+    },
+    {
+      "item": "wmc:bolt_armor_trim_smithing_core"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "wmc:trial_smithing_star"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wmc:sentry_armor_trim_smithing_core"
+    },
+    {
+      "item": "wmc:vex_armor_trim_smithing_core"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "wmc:illager_smithing_star"
+  }
+}

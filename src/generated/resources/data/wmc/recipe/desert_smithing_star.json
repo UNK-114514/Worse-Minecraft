@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wmc:dune_armor_trim_smithing_core"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "wmc:desert_smithing_star"
+  }
+}

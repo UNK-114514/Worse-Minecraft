@@ -1,0 +1,13 @@
+{
+  "type": "wmc:smithing_template_crafting_recipe_serializer",
+  "base_template": {
+    "item": "wmc:vex_armor_trim_smithing_core"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:vex_armor_trim_smithing_template"
+  },
+  "template_core": {
+    "item": "wmc:cobblestone_base_smithing_template"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "wmc:wayfinder_armor_trim_smithing_core"
+    },
+    {
+      "item": "wmc:shaper_armor_trim_smithing_core"
+    },
+    {
+      "item": "wmc:raiser_armor_trim_smithing_core"
+    },
+    {
+      "item": "wmc:host_armor_trim_smithing_core"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "wmc:ruins_smithing_star"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item_shaper_armor_trim_smithing_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "wmc:shaper_armor_trim_smithing_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "wmc:shaper_armor_trim_smithing_template_smithing_template_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item_shaper_armor_trim_smithing_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wmc:shaper_armor_trim_smithing_template_smithing_template_crafting"
+    ]
+  }
+}

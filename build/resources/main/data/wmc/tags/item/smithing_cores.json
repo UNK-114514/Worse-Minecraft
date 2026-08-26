@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#wmc:the_nether_smithing_cores",
+    "#wmc:illager_smithing_cores",
+    "#wmc:desert_smithing_cores",
+    "#wmc:ocean_smithing_cores",
+    "#wmc:jungle_smithing_cores",
+    "#wmc:sculk_smithing_cores",
+    "#wmc:the_end_smithing_cores",
+    "#wmc:ruins_smithing_cores",
+    "#wmc:trial_smithing_cores"
+  ]
+}

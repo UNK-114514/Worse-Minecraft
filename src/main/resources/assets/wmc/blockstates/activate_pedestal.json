@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "wmc:block/activate_pedestal"
+        }
+    }
+}

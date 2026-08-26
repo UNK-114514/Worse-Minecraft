@@ -1,0 +1,11 @@
+// 1.21.1	2026-08-11T19:16:15.4020225	Tags for minecraft:item mod id wmc
+daad1ae724eac63a7f14898431008f18d3ff4d20 data/wmc/tags/item/desert_smithing_cores.json
+133d66819278959e4885a15bb552d9c2c1f173b5 data/wmc/tags/item/illager_smithing_cores.json
+38eb517dbc7aaf22db21811002b0ba168a74668c data/wmc/tags/item/jungle_smithing_cores.json
+eafd55beb197d195963c464a129c6434e2e1003e data/wmc/tags/item/ocean_smithing_cores.json
+c03031b11749b2ac5ad506735d8c9ad25674acb1 data/wmc/tags/item/ruins_smithing_cores.json
+02d890eda971bdb3806631475568278e577e2c40 data/wmc/tags/item/sculk_smithing_cores.json
+f1ff8bc51c1737c2d311158096ef0a8fac55c3f4 data/wmc/tags/item/smithing_cores.json
+0a54a3eb5565c3b521abb9fe08813c8011b8a44a data/wmc/tags/item/the_end_smithing_cores.json
+18d154a4e9901779ab7d56e837eb9975d3c42c2c data/wmc/tags/item/the_nether_smithing_cores.json
+3acef4cae6f1681a2bd165a9ec050515728088ba data/wmc/tags/item/trial_smithing_cores.json

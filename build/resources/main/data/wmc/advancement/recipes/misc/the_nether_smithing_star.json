@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item_the_nether_smithing_cores": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#wmc:the_nether_smithing_cores"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "wmc:the_nether_smithing_star"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item_the_nether_smithing_cores"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "wmc:the_nether_smithing_star"
+    ]
+  }
+}
