@@ -11,7 +11,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AltarCraftingRecipeBuilder implements RecipeBuilder {
-    private final ItemLike n, en, e, es, s, ws, w, wn, mid;
+    private final ItemStack n, en, e, es, s, ws, w, wn, mid;
     private final ItemStack result;
 
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
@@ -30,8 +29,8 @@ public class AltarCraftingRecipeBuilder implements RecipeBuilder {
     private String group;
     private final RecipeCategory category;
 
-    public AltarCraftingRecipeBuilder(RecipeCategory category, ItemLike n, ItemLike en, ItemLike e, ItemLike es,
-                                      ItemLike s, ItemLike ws, ItemLike w, ItemLike wn, ItemLike mid, ItemStack result) {
+    public AltarCraftingRecipeBuilder(RecipeCategory category, ItemStack n, ItemStack en, ItemStack e, ItemStack es,
+                                      ItemStack s, ItemStack ws, ItemStack w, ItemStack wn, ItemStack mid, ItemStack result) {
         this.n = n;
         this.en = en;
         this.e = e;
@@ -45,19 +44,93 @@ public class AltarCraftingRecipeBuilder implements RecipeBuilder {
         this.category = category;
     }
 
-    public static AltarCraftingRecipeBuilder of(RecipeCategory category, ItemLike n, ItemLike en, ItemLike e, ItemLike es,
-                                                ItemLike s, ItemLike ws, ItemLike w, ItemLike wn, ItemLike mid, ItemStack result) {
-        return new AltarCraftingRecipeBuilder(category, n, en, e, es,
-                s, ws, w, wn, mid, result);
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemStack n, ItemStack en, ItemStack e, ItemStack es,
+            ItemStack s, ItemStack ws, ItemStack w, ItemStack wn, ItemStack mid, ItemStack result) {
+        return new AltarCraftingRecipeBuilder(category, n, en, e, es, s, ws, w, wn, mid, result);
     }
 
-    public static AltarCraftingRecipeBuilder of(RecipeCategory category, ItemLike a, ItemLike b, ItemLike mid, ItemStack result) {
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemLike n, ItemLike en, ItemLike e, ItemLike es,
+            ItemLike s, ItemLike ws, ItemLike w, ItemLike wn, ItemLike mid, ItemStack result) {
+        return new AltarCraftingRecipeBuilder(
+                category,
+                n.asItem().getDefaultInstance(),
+                en.asItem().getDefaultInstance(),
+                e.asItem().getDefaultInstance(),
+                es.asItem().getDefaultInstance(),
+                s.asItem().getDefaultInstance(),
+                ws.asItem().getDefaultInstance(),
+                w.asItem().getDefaultInstance(),
+                wn.asItem().getDefaultInstance(),
+                mid.asItem().getDefaultInstance(),
+                result
+        );
+    }
+
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemLike n, ItemLike en, ItemLike e, ItemLike es,
+            ItemLike s, ItemLike ws, ItemLike w, ItemLike wn, ItemStack mid, ItemStack result) {
+        return new AltarCraftingRecipeBuilder(
+                category,
+                n.asItem().getDefaultInstance(),
+                en.asItem().getDefaultInstance(),
+                e.asItem().getDefaultInstance(),
+                es.asItem().getDefaultInstance(),
+                s.asItem().getDefaultInstance(),
+                ws.asItem().getDefaultInstance(),
+                w.asItem().getDefaultInstance(),
+                wn.asItem().getDefaultInstance(),
+                mid,
+                result
+        );
+    }
+
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemStack a, ItemStack b,
+            ItemStack mid, ItemStack result) {
         return new AltarCraftingRecipeBuilder(category, a, b, a, b, a, b, a, b, mid, result);
+    }
+
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemLike a, ItemLike b,
+            ItemLike mid, ItemStack result) {
+        return new AltarCraftingRecipeBuilder(
+                category,
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                mid.asItem().getDefaultInstance(),
+                result
+        );
+    }
+
+    public static AltarCraftingRecipeBuilder of(
+            RecipeCategory category, ItemLike a, ItemLike b,
+            ItemStack mid, ItemStack result) {
+        return new AltarCraftingRecipeBuilder(
+                category,
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                a.asItem().getDefaultInstance(),
+                b.asItem().getDefaultInstance(),
+                mid,
+                result
+        );
     }
 
     @Override
     public @NotNull RecipeBuilder unlockedBy(@NotNull String s, @NotNull Criterion<?> criterion) {
-        this.criteria.put(s, criterion);
+        criteria.put(s, criterion);
         return this;
     }
 
@@ -69,7 +142,7 @@ public class AltarCraftingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return this.result.getItem();
+        return result.getItem();
     }
 
     @Override
@@ -80,12 +153,9 @@ public class AltarCraftingRecipeBuilder implements RecipeBuilder {
                 .requirements(AdvancementRequirements.Strategy.OR);
 
         Objects.requireNonNull(builder);
-        this.criteria.forEach(builder::addCriterion);
+        criteria.forEach(builder::addCriterion);
 
-        AltarCraftingRecipe recipe = new AltarCraftingRecipe(
-                Ingredient.of(n), Ingredient.of(en), Ingredient.of(e), Ingredient.of(es), Ingredient.of(s),
-                Ingredient.of(ws), Ingredient.of(w), Ingredient.of(wn), Ingredient.of(mid), result
-        );
+        AltarCraftingRecipe recipe = new AltarCraftingRecipe(n, en, e, es, s, ws, w, wn, mid, result);
 
         recipeOutput.accept(resourceLocation, recipe, builder.build(resourceLocation.withPrefix("recipes/")));
     }

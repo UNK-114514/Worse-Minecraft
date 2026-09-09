@@ -36,29 +36,16 @@ public abstract class SimpleDisplayBlockEntity extends BlockEntity {
         this.baseModelHeight = baseModelHeight;
     }
 
-//    public static void tick(Level level, BlockPos pos, BlockState blockState, SimpleDisplayBlockEntity be) {
-//
-//    }
-
     @Override
     protected void loadAdditional(@NotNull CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(compoundTag, provider);
-
-        this.inventory.deserializeNBT(provider, compoundTag.getCompound("inventory"));
-
-//        this.animationTick = compoundTag.getInt("animation_tick");
-//        this.shouldPlayAnimation = compoundTag.getBoolean("should_play_animation");
-//        this.isPlayingAnimation = compoundTag.getBoolean("is_playing_animation");
+        inventory.deserializeNBT(provider, compoundTag.getCompound("inventory"));
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(compoundTag, provider);
-        compoundTag.put("inventory", this.inventory.serializeNBT(provider));
-
-//        compoundTag.putInt("animation_tick", this.animationTick);
-//        compoundTag.putBoolean("should_play_animation", this.shouldPlayAnimation);
-//        compoundTag.putBoolean("is_playing_animation", this.isPlayingAnimation);
+        compoundTag.put("inventory", inventory.serializeNBT(provider));
     }
 
     @Override

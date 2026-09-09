@@ -4,6 +4,10 @@ import com.unk.wmc.block.entity.custom.ActivateAltarBlockEntity;
 import com.unk.wmc.item.crafting.WmcRecipeTypes;
 import com.unk.wmc.item.crafting.custom.AltarCraftingRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -59,27 +63,34 @@ public class ActivateAltarBlock extends SimpleDisplayBlock implements EntityBloc
 
         AltarCraftingRecipe recipe = optional.get().value();
 
+        be.shrinkAll();
+
         be.inventory.setStackInSlot(0, recipe.result());
 
-        be.shrinkAll();
+        applyItemCraftedEffects(level, pos);
     }
 
-//    @Override
-//    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-//        if (entity.getType() == EntityType.EXPERIENCE_BOTTLE) {
-//            onCraft(level, pos);
-//        }
-//    }
+    public void applyItemCraftedEffects(Level level, BlockPos pos) {
+        level.explode(null, pos.getX(), pos.getY(), pos.getZ(), 5, false, Level.ExplosionInteraction.TRIGGER);
 
+        level.playSound(null, pos, SoundEvents.TOTEM_USE, SoundSource.BLOCKS);
 
-//    @Override
-//    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-//        if (player.isCrouching()) {
-//            onCraft(level, pos);
-//        }
-//        Wmc.LOGGER.info("used");
-//        return InteractionResult.SUCCESS;
-//    }
+        if (!(level instanceof ServerLevel serverLevel)) return;
+
+        for (int i = 0; i < 500; i++) {
+            serverLevel.sendParticles(
+                    ParticleTypes.TOTEM_OF_UNDYING,
+                    pos.getX() + 0.5,
+                    pos.getY() + 1,
+                    pos.getZ() + 0.5,
+                    1,
+                    level.random.nextFloat() * 2 - 1,
+                    level.random.nextFloat() * 2 - 1,
+                    level.random.nextFloat() * 2 - 1,
+                    1
+            );
+        }
+    }
 
     @Override
     public void onProjectileHit(

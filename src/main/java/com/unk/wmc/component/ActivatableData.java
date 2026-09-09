@@ -5,19 +5,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 
-@SuppressWarnings("unused")
-public record ActivatableData(ResourceLocation itemId, boolean isActivated) {
-    public static final ActivatableData EMPTY = new ActivatableData(null, false);
+public record ActivatableData(boolean isActivated) {
+    public static final ActivatableData ACTIVATED = new ActivatableData(true);
+    public static final ActivatableData UNACTIVATED = new ActivatableData(false);
 
-    public static final Codec<ActivatableData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("id").forGetter(ActivatableData::itemId),
+    public static final Codec<ActivatableData> CODEC = RecordCodecBuilder.create(inst -> inst.group(
             Codec.BOOL.fieldOf("is_activated").forGetter(ActivatableData::isActivated)
-    ).apply(instance, ActivatableData::new));
+    ).apply(inst, ActivatableData::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ActivatableData> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, ActivatableData::itemId,
             ByteBufCodecs.BOOL, ActivatableData::isActivated,
             ActivatableData::new
     );

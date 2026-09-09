@@ -1,34 +1,55 @@
 {
   "type": "wmc:altar_recipe_serializer",
   "e": {
-    "item": "minecraft:echo_shard"
+    "count": 1,
+    "id": "minecraft:echo_shard"
   },
   "en": {
-    "item": "minecraft:experience_bottle"
+    "count": 1,
+    "id": "minecraft:experience_bottle"
   },
   "es": {
-    "item": "minecraft:experience_bottle"
+    "count": 1,
+    "id": "minecraft:experience_bottle"
   },
   "mid": {
-    "item": "minecraft:deepslate"
+    "components": {
+      "wmc:activatable": {
+        "id": "minecraft:silence_armor_trim_smithing_template",
+        "is_activated": false
+      }
+    },
+    "count": 1,
+    "id": "wmc:smithing_template_dust"
   },
   "n": {
-    "item": "minecraft:echo_shard"
+    "count": 1,
+    "id": "minecraft:echo_shard"
   },
   "result": {
+    "components": {
+      "wmc:activatable": {
+        "id": "minecraft:silence_armor_trim_smithing_template",
+        "is_activated": true
+      }
+    },
     "count": 1,
-    "id": "minecraft:silence_armor_trim_smithing_template"
+    "id": "wmc:smithing_template_dust"
   },
   "s": {
-    "item": "minecraft:echo_shard"
+    "count": 1,
+    "id": "minecraft:echo_shard"
   },
   "w": {
-    "item": "minecraft:echo_shard"
+    "count": 1,
+    "id": "minecraft:echo_shard"
   },
   "wn": {
-    "item": "minecraft:experience_bottle"
+    "count": 1,
+    "id": "minecraft:experience_bottle"
   },
   "ws": {
-    "item": "minecraft:experience_bottle"
+    "count": 1,
+    "id": "minecraft:experience_bottle"
   }
 }

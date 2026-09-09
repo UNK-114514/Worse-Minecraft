@@ -15,7 +15,6 @@ public record AltarCraftingRecipeInput(
         ItemStack wn,   // ↖
         ItemStack mid   // o
 ) implements RecipeInput {
-
     public static final AltarCraftingRecipeInput EMPTY = new AltarCraftingRecipeInput(
             ItemStack.EMPTY,
             ItemStack.EMPTY,
@@ -47,5 +46,18 @@ public record AltarCraftingRecipeInput(
     @Override
     public int size() {
         return 9;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return n.isEmpty()
+                && en.isEmpty()
+                && e.isEmpty()
+                && es.isEmpty()
+                && s.isEmpty()
+                && ws.isEmpty()
+                && w.isEmpty()
+                && wn.isEmpty()
+                && mid.isEmpty();
     }
 }

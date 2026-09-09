@@ -1,10 +1,11 @@
 package com.unk.wmc.item;
 
+import com.unk.wmc.Wmc;
+import com.unk.wmc.item.custom.BlueprintItem;
 import com.unk.wmc.item.custom.SmithingTemplateDustItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.unk.wmc.Wmc;
 
 public class WmcItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Wmc.MOD_ID);
@@ -79,4 +80,5 @@ public class WmcItems {
     public static final DeferredItem<Item> TRIAL_SMITHING_STAR = ITEMS.register("trial_smithing_star", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> SMITHING_TEMPLATE_DUST = ITEMS.register("smithing_template_dust", () -> new SmithingTemplateDustItem(new Item.Properties()));
+    public static final DeferredItem<Item> BLUEPRINT = ITEMS.register("blueprint", () -> new BlueprintItem(new Item.Properties()));
 }

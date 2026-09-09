@@ -13,54 +13,40 @@ public class ActivateAltarBlockEntity extends SimpleDisplayBlockEntity {
     }
 
     public AltarCraftingRecipeInput getInput() {
-        if (this.level == null) return AltarCraftingRecipeInput.EMPTY;
+        if (level == null) return AltarCraftingRecipeInput.EMPTY;
 
         BlockPos pos = this.getBlockPos();
 
-        BlockPos n = pos.north(3);
-        BlockPos en = pos.east(2).north(2);
-        BlockPos e = pos.east(3);
-        BlockPos es = pos.east(2).south(2);
-        BlockPos s = pos.south(3);
-        BlockPos ws = pos.west(2).south(2);
-        BlockPos w = pos.west(3);
-        BlockPos wn = pos.west(2).north(2);
-
         return new AltarCraftingRecipeInput(
-                getItemInPedestal(this.level, n),
-                getItemInPedestal(this.level, en),
-                getItemInPedestal(this.level, e),
-                getItemInPedestal(this.level, es),
-                getItemInPedestal(this.level, s),
-                getItemInPedestal(this.level, ws),
-                getItemInPedestal(this.level, w),
-                getItemInPedestal(this.level, wn),
-                this.inventory.getStackInSlot(0)
+                getItemInPedestal(level, pos.north(3)),
+                getItemInPedestal(level, pos.east(2).north(2)),
+                getItemInPedestal(level, pos.east(3)),
+                getItemInPedestal(level, pos.east(2).south(2)),
+                getItemInPedestal(level, pos.south(3)),
+                getItemInPedestal(level, pos.west(2).south(2)),
+                getItemInPedestal(level, pos.west(3)),
+                getItemInPedestal(level, pos.west(2).north(2)),
+                inventory.getStackInSlot(0)
         );
     }
 
     public void shrinkAll() {
-        if (this.level == null) return;
+        if (level == null) return;
 
         BlockPos pos = this.getBlockPos();
 
-        BlockPos n = pos.north(3);
-        BlockPos en = pos.east(2).north(2);
-        BlockPos e = pos.east(3);
-        BlockPos es = pos.east(2).south(2);
-        BlockPos s = pos.south(3);
-        BlockPos ws = pos.west(2).south(2);
-        BlockPos w = pos.west(3);
-        BlockPos wn = pos.west(2).north(2);
+        shrinkPedestal(level, pos.north(3));
+        shrinkPedestal(level, pos.east(2).north(2));
+        shrinkPedestal(level, pos.east(3));
+        shrinkPedestal(level, pos.east(2).south(2));
+        shrinkPedestal(level, pos.south(3));
+        shrinkPedestal(level, pos.west(2).south(2));
+        shrinkPedestal(level, pos.west(3));
+        shrinkPedestal(level, pos.west(2).north(2));
 
-        shrinkPedestal(this.level, n);
-        shrinkPedestal(this.level, en);
-        shrinkPedestal(this.level, e);
-        shrinkPedestal(this.level, es);
-        shrinkPedestal(this.level, s);
-        shrinkPedestal(this.level, ws);
-        shrinkPedestal(this.level, w);
-        shrinkPedestal(this.level, wn);
+        inventory.getStackInSlot(0).shrink(1);
+        this.setChanged();
+        level.sendBlockUpdated(pos, level.getBlockState(pos), level.getBlockState(pos), 3);
     }
 
     private ItemStack getItemInPedestal(Level level, BlockPos pos) {
@@ -70,12 +56,11 @@ public class ActivateAltarBlockEntity extends SimpleDisplayBlockEntity {
         return ItemStack.EMPTY;
     }
 
-    private void shrinkPedestal(Level level, BlockPos pos) {
+    private static void shrinkPedestal(Level level, BlockPos pos) {
         if (level.getBlockEntity(pos) instanceof ActivatePedestalBlockEntity be) {
-            ItemStack result = be.inventory.getStackInSlot(0).copy();
-            result.shrink(1);
-
-            be.inventory.setStackInSlot(0, result);
+            be.inventory.getStackInSlot(0).shrink(1);
+            be.setChanged();
+            level.sendBlockUpdated(pos, level.getBlockState(pos), level.getBlockState(pos), 3);
         }
     }
 }

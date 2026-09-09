@@ -19,6 +19,8 @@ public class WmcItemTags {
 
     public static final TagKey<Item> SMITHING_CORES = create("smithing_cores");
 
+    public static final TagKey<Item> FINAL_SMITING_TEMPLATE_REQUIRES = create("final_smithing_template_requires");
+
     private static TagKey<Item> create(String path) {
         return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, path));
     }

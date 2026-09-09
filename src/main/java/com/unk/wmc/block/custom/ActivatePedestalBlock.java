@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ActivatePedestalBlock extends SimpleDisplayBlock {
     private static final VoxelShape VOXEL_SHAPE = Block.box(0, 0, 0, 16, 20, 16);
+    private static final VoxelShape VOXEL_SHAPE_LOWER = Block.box(0, 0, 0, 16, 16, 16);
 
     public ActivatePedestalBlock(Properties properties) {
         super(properties);
@@ -23,7 +24,7 @@ public class ActivatePedestalBlock extends SimpleDisplayBlock {
     protected @NotNull VoxelShape getShape(
             @NotNull BlockState state, @NotNull BlockGetter level,
             @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return VOXEL_SHAPE;
+        return level.getBlockState(pos.above()).isAir() ? VOXEL_SHAPE : VOXEL_SHAPE_LOWER;
     }
 
     @Override

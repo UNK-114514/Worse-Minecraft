@@ -2,6 +2,7 @@ package com.unk.wmc.item.crafting.custom;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.unk.wmc.block.WmcBlocks;
 import com.unk.wmc.item.crafting.WmcRecipeSerializers;
 import com.unk.wmc.item.crafting.WmcRecipeTypes;
 import com.unk.wmc.item.crafting.input.AltarCraftingRecipeInput;
@@ -9,27 +10,26 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public record AltarCraftingRecipe(Ingredient n, Ingredient en, Ingredient e, Ingredient es, Ingredient s, Ingredient ws,
-                                  Ingredient w, Ingredient wn, Ingredient mid,
+public record AltarCraftingRecipe(ItemStack n, ItemStack en, ItemStack e, ItemStack es, ItemStack s, ItemStack ws,
+                                  ItemStack w, ItemStack wn, ItemStack mid,
                                   ItemStack result) implements Recipe<AltarCraftingRecipeInput> {
     @Override
     public boolean matches(AltarCraftingRecipeInput input, @NotNull Level level) {
-        return n.test(input.getItem(0))
-                && en.test(input.getItem(1))
-                && e.test(input.getItem(2))
-                && es.test(input.getItem(3))
-                && s.test(input.getItem(4))
-                && ws.test(input.getItem(5))
-                && w.test(input.getItem(6))
-                && wn.test(input.getItem(7))
-                && mid.test(input.getItem(8));
+        return ItemStack.isSameItemSameComponents(n, input.getItem(0))
+                && ItemStack.isSameItemSameComponents(en, input.getItem(1))
+                && ItemStack.isSameItemSameComponents(e, input.getItem(2))
+                && ItemStack.isSameItemSameComponents(es, input.getItem(3))
+                && ItemStack.isSameItemSameComponents(s, input.getItem(4))
+                && ItemStack.isSameItemSameComponents(ws, input.getItem(5))
+                && ItemStack.isSameItemSameComponents(w, input.getItem(6))
+                && ItemStack.isSameItemSameComponents(wn, input.getItem(7))
+                && ItemStack.isSameItemSameComponents(mid, input.getItem(8));
     }
 
     @Override
@@ -59,20 +59,25 @@ public record AltarCraftingRecipe(Ingredient n, Ingredient en, Ingredient e, Ing
         return WmcRecipeTypes.ALTAR_RECIPE_TYPE.get();
     }
 
+    @Override
+    public @NotNull ItemStack getToastSymbol() {
+        return new ItemStack(WmcBlocks.ACTIVATE_ALTAR.get());
+    }
+
     public static class Serializer implements RecipeSerializer<AltarCraftingRecipe> {
         public static final MapCodec<AltarCraftingRecipe> CODEC =
                 RecordCodecBuilder.mapCodec(
                         inst -> inst.group(
-                                Ingredient.CODEC.fieldOf("n").forGetter(AltarCraftingRecipe::n),
-                                Ingredient.CODEC.fieldOf("en").forGetter(AltarCraftingRecipe::en),
-                                Ingredient.CODEC.fieldOf("e").forGetter(AltarCraftingRecipe::e),
-                                Ingredient.CODEC.fieldOf("es").forGetter(AltarCraftingRecipe::es),
-                                Ingredient.CODEC.fieldOf("s").forGetter(AltarCraftingRecipe::s),
-                                Ingredient.CODEC.fieldOf("ws").forGetter(AltarCraftingRecipe::ws),
-                                Ingredient.CODEC.fieldOf("w").forGetter(AltarCraftingRecipe::w),
-                                Ingredient.CODEC.fieldOf("wn").forGetter(AltarCraftingRecipe::wn),
-                                Ingredient.CODEC.fieldOf("mid").forGetter(AltarCraftingRecipe::mid),
-                                net.minecraft.world.item.ItemStack.CODEC.fieldOf("result").forGetter(AltarCraftingRecipe::result)
+                                ItemStack.CODEC.fieldOf("n").forGetter(AltarCraftingRecipe::n),
+                                ItemStack.CODEC.fieldOf("en").forGetter(AltarCraftingRecipe::en),
+                                ItemStack.CODEC.fieldOf("e").forGetter(AltarCraftingRecipe::e),
+                                ItemStack.CODEC.fieldOf("es").forGetter(AltarCraftingRecipe::es),
+                                ItemStack.CODEC.fieldOf("s").forGetter(AltarCraftingRecipe::s),
+                                ItemStack.CODEC.fieldOf("ws").forGetter(AltarCraftingRecipe::ws),
+                                ItemStack.CODEC.fieldOf("w").forGetter(AltarCraftingRecipe::w),
+                                ItemStack.CODEC.fieldOf("wn").forGetter(AltarCraftingRecipe::wn),
+                                ItemStack.CODEC.fieldOf("mid").forGetter(AltarCraftingRecipe::mid),
+                                ItemStack.CODEC.fieldOf("result").forGetter(AltarCraftingRecipe::result)
                         ).apply(inst, AltarCraftingRecipe::new)
                 );
 
@@ -80,30 +85,30 @@ public record AltarCraftingRecipe(Ingredient n, Ingredient en, Ingredient e, Ing
                 new StreamCodec<>() {
                     @Override
                     public @NotNull AltarCraftingRecipe decode(@NotNull RegistryFriendlyByteBuf buf) {
-                        Ingredient n = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient en = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient e = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient es = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient s = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient ws = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient w = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient wn = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
-                        Ingredient mid = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+                        ItemStack n = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack en = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack e = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack es = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack s = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack ws = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack w = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack wn = ItemStack.STREAM_CODEC.decode(buf);
+                        ItemStack mid = ItemStack.STREAM_CODEC.decode(buf);
                         ItemStack result = net.minecraft.world.item.ItemStack.STREAM_CODEC.decode(buf);
                         return new AltarCraftingRecipe(n, en, e, es, s, ws, w, wn, mid, result);
                     }
 
                     @Override
                     public void encode(@NotNull RegistryFriendlyByteBuf buf, AltarCraftingRecipe recipe) {
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.n());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.en());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.e());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.es());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.s());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.ws());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.w());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.wn());
-                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, recipe.mid());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.n());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.en());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.e());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.es());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.s());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.ws());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.w());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.wn());
+                        ItemStack.STREAM_CODEC.encode(buf, recipe.mid());
                         ItemStack.STREAM_CODEC.encode(buf, recipe.result());
                     }
                 };

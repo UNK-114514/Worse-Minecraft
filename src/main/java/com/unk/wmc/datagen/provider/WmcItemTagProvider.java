@@ -1,11 +1,13 @@
 package com.unk.wmc.datagen.provider;
 
 import com.unk.wmc.Wmc;
-import com.unk.wmc.item.WmcItems;
 import com.unk.wmc.item.WmcItemTags;
+import com.unk.wmc.item.WmcItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -67,5 +69,9 @@ public class WmcItemTagProvider extends ItemTagsProvider {
                 .addTag(WmcItemTags.THE_END_SMITHING_CORES)
                 .addTag(WmcItemTags.RUINS_SMITHING_CORES)
                 .addTag(WmcItemTags.TRIAL_SMITHING_CORES);
+
+        tag(WmcItemTags.FINAL_SMITING_TEMPLATE_REQUIRES)
+                .add(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
+                .addTag(ItemTags.TRIM_TEMPLATES);
     }
 }

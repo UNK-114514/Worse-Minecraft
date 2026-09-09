@@ -1,5 +1,6 @@
-// 1.21.1	2026-08-11T19:16:15.4020225	Tags for minecraft:item mod id wmc
+// 1.21.1	2026-09-05T19:54:27.7269512	Tags for minecraft:item mod id wmc
 daad1ae724eac63a7f14898431008f18d3ff4d20 data/wmc/tags/item/desert_smithing_cores.json
+d0a9b643ff73697b9720d3084e7634aa1258abb2 data/wmc/tags/item/final_smithing_template_requires.json
 133d66819278959e4885a15bb552d9c2c1f173b5 data/wmc/tags/item/illager_smithing_cores.json
 38eb517dbc7aaf22db21811002b0ba168a74668c data/wmc/tags/item/jungle_smithing_cores.json
 eafd55beb197d195963c464a129c6434e2e1003e data/wmc/tags/item/ocean_smithing_cores.json
