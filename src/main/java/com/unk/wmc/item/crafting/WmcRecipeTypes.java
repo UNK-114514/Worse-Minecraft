@@ -12,5 +12,4 @@ public class WmcRecipeTypes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, Wmc.MOD_ID);
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<AltarCraftingRecipe>> ALTAR_RECIPE_TYPE = RECIPE_TYPES.register("altar_crafting_type", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "altar_crafting_type")));
-    public static final DeferredHolder<RecipeType<?>, RecipeType<AltarCraftingRecipe>> BLUEPRINT_DRAFTER_RECIPE_TYPE = RECIPE_TYPES.register("blueprint_drafter_type", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint_drafter_type")));
 }

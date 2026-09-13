@@ -20,11 +20,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 @Mod(Wmc.MOD_ID)
-@SuppressWarnings("unused")
 public class Wmc {
     public static final String MOD_ID = "wmc";
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -45,11 +43,6 @@ public class Wmc {
         WmcDataComponentTypes.DATA_COMPONENT_TYPES.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-
     }
 
     @SubscribeEvent

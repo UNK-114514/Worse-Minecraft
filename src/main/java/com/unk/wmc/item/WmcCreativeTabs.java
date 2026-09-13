@@ -1,6 +1,7 @@
 package com.unk.wmc.item;
 
 import com.unk.wmc.Wmc;
+import com.unk.wmc.block.WmcBlocks;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -28,66 +29,26 @@ public class WmcCreativeTabs {
                     })
                     .displayItems(
                             (itemDisplayParameters, output) -> {
-//                                output.accept(WmcItems.NETHERITE_UPGRADE_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.COAST_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.WILD_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.WARD_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.EYE_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.VEX_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.RIB_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.HOST_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-//                                output.accept(WmcItems.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE_FRAGMENT);
-                                output.accept(WmcItems.NETHERITE_UPGRADE_SMITHING_CORE);
-                                output.accept(WmcItems.SENTRY_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.DUNE_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.COAST_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.WILD_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.WARD_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.EYE_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.VEX_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.TIDE_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.SNOUT_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.RIB_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.SPIRE_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.WAYFINDER_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.SHAPER_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.SILENCE_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.RAISER_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.HOST_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.FLOW_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.BOLT_ARMOR_TRIM_SMITHING_CORE);
-                                output.accept(WmcItems.THE_NETHER_SMITHING_STAR);
-                                output.accept(WmcItems.ILLAGER_SMITHING_STAR);
-                                output.accept(WmcItems.DESERT_SMITHING_STAR);
-                                output.accept(WmcItems.OCEAN_SMITHING_STAR);
-                                output.accept(WmcItems.TRIAL_SMITHING_STAR);
-                                output.accept(WmcItems.SCULK_SMITHING_STAR);
-                                output.accept(WmcItems.THE_END_SMITHING_STAR);
-                                output.accept(WmcItems.RUINS_SMITHING_STAR);
-                                output.accept(WmcItems.NETHERRACK_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.COBBLESTONE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.SANDSTONE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.MOSSY_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.COBBLED_DEEPSLATE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.END_STONE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.PRISMARINE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.BLACKSTONE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.NETHER_BRICKS_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.PURPUR_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.TERRACOTTA_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.SCULK_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.BREEZE_BASE_SMITHING_TEMPLATE);
-                                output.accept(WmcItems.COPPER_BASE_SMITHING_TEMPLATE);
+                                output.accept(WmcItems.SMITHING_TEMPLATE_DUST);
+                                output.accept(WmcItems.BLUEPRINT);
+                                output.accept(WmcItems.RANDOM_BLUEPRINT);
+
+                                output.accept(WmcItems.RAW_TERMINUS_INGOT);
+                                output.accept(WmcBlocks.TERMINUS_BLOCK);
+                                output.accept(WmcItems.TERMINUS_INGOT);
+                                output.accept(WmcItems.TERMINUS_NUGGET);
+                                output.accept(WmcItems.TERMINUS_UPGRADE_SMITHING_TEMPLATE);
+
+                                output.accept(WmcItems.COPPER_COGWHEEL);
+                                output.accept(WmcItems.IRON_COGWHEEL);
+                                output.accept(WmcItems.GOLD_COGWHEEL);
+                                output.accept(WmcItems.DIAMOND_COGWHEEL);
+                                output.accept(WmcItems.NETHERITE_COGWHEEL);
+
+                                output.accept(WmcBlocks.ACTIVATE_ALTAR);
+                                output.accept(WmcBlocks.ACTIVATE_PEDESTAL);
+
+                                output.accept(WmcBlocks.ASSEMBLY_TABLE);
                             }
                     )
                     .build()

@@ -2,10 +2,12 @@ package com.unk.wmc.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.unk.wmc.component.BlueprintData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ItemStackHelper;
 import com.unk.wmc.item.WmcItemTags;
-import com.unk.wmc.item.custom.BlueprintItem;
+import com.unk.wmc.item.WmcItems;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -18,7 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import java.util.*;
+import java.util.Optional;
 
 public class WmcDebugCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
@@ -70,11 +72,11 @@ public class WmcDebugCommand {
 
                                     if (player == null) return 0;
 
-                                    BlueprintItem.BlueprintBuilder builder =
-                                            new BlueprintItem.BlueprintBuilder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+                                    BlueprintData.BlueprintComponentBuilder builder =
+                                            new BlueprintData.BlueprintComponentBuilder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
 
                                     Optional<HolderSet.Named<Item>> optionalTag =
-                                            BuiltInRegistries.ITEM.getTag(WmcItemTags.FINAL_SMITING_TEMPLATE_REQUIRES);
+                                            BuiltInRegistries.ITEM.getTag(WmcItemTags.TERMINUS_UPGRADE_SMITHING_TEMPLATE_REQUIRES);
 
                                     optionalTag.ifPresent(holders -> {
                                         for (var holder : holders) {
@@ -82,37 +84,34 @@ public class WmcDebugCommand {
                                         }
                                     });
 
-                                    ItemStackHelper.givePlayerStack(player, builder.build());
+                                    ItemStack result = WmcItems.BLUEPRINT.get().getDefaultInstance();
+                                    result.set(WmcDataComponentTypes.BLUEPRINT.get(), builder.build());
+
+                                    ItemStackHelper.givePlayerStack(player, result);
 
                                     return 1;
                                 })
                         )
-                        .then(Commands.literal("random_100")
-                                .executes(context -> {
-                                    CommandSourceStack source = context.getSource();
-                                    Player player = source.getPlayer();
+                        .then(Commands.literal("random")
+                                .then(Commands.argument("count", IntegerArgumentType.integer(1, 2147483647))
+                                        .executes(context -> {
+                                            CommandSourceStack source = context.getSource();
+                                            Player player = source.getPlayer();
 
-                                    if (player == null) return 0;
+                                            if (player == null) return 0;
 
-                                    BlueprintItem.BlueprintBuilder builder =
-                                            new BlueprintItem.BlueprintBuilder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+                                            BlueprintData.BlueprintComponentBuilder builder =
+                                                    new BlueprintData.BlueprintComponentBuilder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
 
-                                    List<Integer> indexes = new ArrayList<>();
+                                            ItemStack result = WmcItems.RANDOM_BLUEPRINT.get().getDefaultInstance();
+                                            result.set(WmcDataComponentTypes.BLUEPRINT.get(),
+                                                    builder.getRandom(IntegerArgumentType.getInteger(context, "count")));
 
-                                    for (int i = 0; i < BuiltInRegistries.ITEM.size(); i++) {
-                                        indexes.add(i);
-                                    }
+                                            ItemStackHelper.givePlayerStack(player, result);
 
-                                    Collections.shuffle(indexes);
-
-                                    for (int i : indexes.subList(0, 100)) {
-                                        builder.addStep(BuiltInRegistries.ITEM.byId(i));
-                                    }
-
-                                    ItemStackHelper.givePlayerStack(player, builder.build());
-
-                                    return 1;
-                                })
+                                            return 1;
+                                        })
+                                )
                         )
                 )
         );

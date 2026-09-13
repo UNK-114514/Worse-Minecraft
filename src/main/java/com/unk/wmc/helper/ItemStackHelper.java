@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SmithingTemplateItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,11 +38,11 @@ public class ItemStackHelper {
         return result;
     }
 
-    public static Item fromResourceLocation(ResourceLocation loc) {
+    public static @Nullable Item fromResourceLocation(ResourceLocation loc) {
         if (BuiltInRegistries.ITEM.containsKey(loc)) {
             return BuiltInRegistries.ITEM.get(loc);
         }
-        return Items.AIR;
+        return null;
     }
 
     public static ItemStack getDustOf(Item item, boolean isActivated) {
@@ -63,6 +62,11 @@ public class ItemStackHelper {
         return result;
     }
 
+    public static ItemStack withActivatable(Item item, boolean isActivated) {
+        ItemStack stack = item.getDefaultInstance();
+        return withActivatable(stack, isActivated);
+    }
+
     public static ItemStack doNextStep(ItemStack stack) {
         ItemStack copy = stack.copy();
 
@@ -72,7 +76,11 @@ public class ItemStackHelper {
         if (!BuiltInRegistries.ITEM.containsKey(data.itemId())) return stack;
         if (data.remainingSteps().size() <= 1) {
             ResourceLocation resultLoc = data.itemId();
-            return fromResourceLocation(resultLoc).getDefaultInstance();
+            Item result = fromResourceLocation(resultLoc);
+            if (result != null) {
+                return result.getDefaultInstance();
+            }
+            return stack;
         }
 
         List<ResourceLocation> remaining = new LinkedList<>(data.remainingSteps());

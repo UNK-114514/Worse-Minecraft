@@ -13,6 +13,7 @@ import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -71,7 +72,21 @@ public class ActivateAltarBlock extends SimpleDisplayBlock implements EntityBloc
     }
 
     public void applyItemCraftedEffects(Level level, BlockPos pos) {
-        level.explode(null, pos.getX(), pos.getY(), pos.getZ(), 5, false, Level.ExplosionInteraction.TRIGGER);
+        level.explode(
+                null,
+                null,
+                new SimpleExplosionDamageCalculator(
+                        false,
+                        false,
+                        Optional.of(0F),
+                        Optional.empty()
+                ),
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                15,
+                false,
+                Level.ExplosionInteraction.TRIGGER);
 
         level.playSound(null, pos, SoundEvents.TOTEM_USE, SoundSource.BLOCKS);
 

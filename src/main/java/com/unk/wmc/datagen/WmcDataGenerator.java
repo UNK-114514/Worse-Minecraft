@@ -25,6 +25,9 @@ public class WmcDataGenerator {
         generator.addProvider(event.includeClient(), new WmcItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new WmcBlockStateProvider(packOutput, existingFileHelper));
 
+        generator.addProvider(event.includeClient(), new WmcZhCnProvider(packOutput));
+        generator.addProvider(event.includeClient(), new WmcEnUsProvider(packOutput));
+
         BlockTagsProvider blockTagsProvider = new WmcBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
 
         generator.addProvider(event.includeServer(), blockTagsProvider);

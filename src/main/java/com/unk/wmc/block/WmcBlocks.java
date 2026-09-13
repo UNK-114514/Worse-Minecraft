@@ -15,10 +15,12 @@ import java.util.function.Supplier;
 public class WmcBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.Blocks.createBlocks(Wmc.MOD_ID);
 
-    public static final DeferredBlock<Block> ACTIVATE_ALTAR = registerBlock("activate_altar", () -> new ActivateAltarBlock(BlockBehaviour.Properties.of()));
-    public static final DeferredBlock<Block> ACTIVATE_PEDESTAL = registerBlock("activate_pedestal", () -> new ActivatePedestalBlock(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> TERMINUS_BLOCK = registerBlock("terminus_block", () -> new Block(BlockBehaviour.Properties.of().strength(100.0F, 2400.0F)));
 
-    public static final DeferredBlock<Block> BLUEPRINT_DRAFTER = registerBlock("blueprint_drafter", () -> new AssemblyTableBlock(BlockBehaviour.Properties.of()));
+    public static final DeferredBlock<Block> ACTIVATE_ALTAR = registerBlock("activate_altar", () -> new ActivateAltarBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final DeferredBlock<Block> ACTIVATE_PEDESTAL = registerBlock("activate_pedestal", () -> new ActivatePedestalBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
+    public static final DeferredBlock<Block> ASSEMBLY_TABLE = registerBlock("assembly_table", () -> new AssemblyTableBlock(BlockBehaviour.Properties.of()));
 
     public static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         WmcItems.ITEMS.registerSimpleBlockItem(name, block);

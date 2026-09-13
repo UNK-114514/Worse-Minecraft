@@ -40,44 +40,30 @@ public abstract class SimpleDisplayBlock extends Block implements EntityBlock {
 
         if (stackInHand.isEmpty() && stackInSlot.isEmpty()) return ItemInteractionResult.SUCCESS;
 
-        if (!stackInHand.isEmpty() && stackInSlot.isEmpty()) {  // Take item
+        if (!stackInHand.isEmpty() && stackInSlot.isEmpty()) {  // Insert item
             ItemStack toSlot0 = stackInHand.copy();
             toSlot0.setCount(1);
 
-            stackInHand.shrink(1);
+            stackInHand.consume(1, player);
             be.inventory.setStackInSlot(0, toSlot0);
-        } else if (ItemStack.isSameItemSameComponents(stackInHand, stackInSlot) // Insert item
+        } else if (ItemStack.isSameItemSameComponents(stackInHand, stackInSlot) // Merge item
                 && stackInHand.getCount() + stackInSlot.getCount() <= stackInHand.getMaxStackSize()) {
-            player.setItemInHand(hand, ItemStackHelper.mergeStackForcibly(stackInHand, stackInSlot));
+            if (!player.hasInfiniteMaterials()) {
+                player.setItemInHand(hand, ItemStackHelper.mergeStackForcibly(stackInHand, stackInSlot));
+            }
+
             be.inventory.setStackInSlot(0, ItemStack.EMPTY);
         } else {    // Swap item
-//            ItemStack stackToPlayer = stackInSlot.copy();
-//            stackToPlayer.setCount(1);
-//
-//            ItemStack stackToSlot = stackInHand.copy();
-//            stackToSlot.setCount(1);
-
             be.inventory.setStackInSlot(0, ItemStackHelper.setStackCount(stackInHand, 1));
-            ItemStackHelper.givePlayerStack(player, ItemStackHelper.setStackCount(stackInSlot, 1));
+            if (!player.hasInfiniteMaterials()){
+                ItemStackHelper.givePlayerStack(player, ItemStackHelper.setStackCount(stackInSlot, 1));
+            }
 
-            stackInHand.shrink(1);
+            stackInHand.consume(1, player);
         }
 
         return ItemInteractionResult.SUCCESS;
     }
-
-
-
-//    @Override
-//    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-//            @NotNull Level level, @NotNull BlockState state,
-//            @NotNull BlockEntityType<T> blockEntityType) {
-//        return (lvl, bs, pos, be) -> {
-//            if (be instanceof SimpleDisplayBlockEntity simpleDisplayBE) {
-//                SimpleDisplayBlockEntity.tick(lvl, bs, pos, simpleDisplayBE);
-//            }
-//        };
-//    }
 
     @Override
     protected void onRemove(

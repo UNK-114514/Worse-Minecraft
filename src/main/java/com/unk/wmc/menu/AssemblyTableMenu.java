@@ -41,7 +41,7 @@ public class AssemblyTableMenu extends ItemCombinerMenu {
 
     @Override
     protected boolean isValidBlock(@NotNull BlockState blockState) {
-        return blockState.is(WmcBlocks.BLUEPRINT_DRAFTER);
+        return blockState.is(WmcBlocks.ASSEMBLY_TABLE);
     }
 
     @Override
@@ -127,6 +127,8 @@ public class AssemblyTableMenu extends ItemCombinerMenu {
     }
 
     private static boolean isBlueprintOrPaper(ItemStack stack) {
-        return stack.getItem() == WmcItems.BLUEPRINT.get() || stack.getItem() == Items.PAPER;
+        return stack.getItem() == WmcItems.BLUEPRINT.get()
+                || stack.getItem() == WmcItems.RANDOM_BLUEPRINT.get()
+                || stack.getItem() == Items.PAPER;
     }
 }
