@@ -33,7 +33,7 @@ public class SmithingTemplateRecipe extends CustomRecipe {
                 List.of(
                         List.of(
                                 Items.DIAMOND_BLOCK,
-                                WmcItems.SMITHING_TEMPLATE_DUST.get(),
+                                WmcItems.SMITHING_TEMPLATE_CORE.get(),
                                 Items.DIAMOND_BLOCK
                         ),
                         List.of(
@@ -73,6 +73,6 @@ public class SmithingTemplateRecipe extends CustomRecipe {
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return WmcRecipeSerializers.SMITHING_TEMPLATE_RECIPE_SERIALIZER.get();
+        return WmcRecipeSerializers.SMITHING_TEMPLATE_FROM_CORE.get();
     }
 }

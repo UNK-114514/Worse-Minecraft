@@ -19,7 +19,7 @@ import java.util.List;
 public class AltarCraftingRecipeCategory extends AbstractRecipeCategory<AltarCraftingRecipe> {
     public AltarCraftingRecipeCategory(IGuiHelper guiHelper) {
         super(
-                WmcJeiRecipeTypes.ALTAR_RECIPE_TYPE,
+                WmcJeiRecipeTypes.ALTAR_CRAFTING,
                 Component.literal("Altar Crafting"),
                 guiHelper.createDrawableIngredient(
                         VanillaTypes.ITEM_STACK,

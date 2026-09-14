@@ -14,6 +14,7 @@ public class WmcZhCnProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add(WmcItems.SMITHING_TEMPLATE_DUST.get(), "锻造模板粉尘");
+        add(WmcItems.SMITHING_TEMPLATE_CORE.get(), "锻造模板核心");
         add(WmcItems.EMPTY_SMITING_TEMPLATE.get(), "空白锻造模板");
         add(WmcItems.BLUEPRINT.get(), "蓝图");
         add(WmcItems.RANDOM_BLUEPRINT.get(), "随机蓝图");
@@ -50,20 +51,5 @@ public class WmcZhCnProvider extends LanguageProvider {
         add("item.wmc.general.unknown_item", "未知的物品");
         add("item.wmc.general.activated", "已激活");
         add("item.wmc.general.unactivated", "未激活");
-
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.applies_to")), "下界合金装备");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.ingredients")), "终焉锭");
-//        add(Util.makeDescriptionId("upgrade", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "terminus_upgrade")), "终焉升级");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.base_slot_description")), "放入下界合金盔甲、武器或工具");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.additions_slot_description")), "放入终焉合金锭");
-//
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.progress")), "进度: ");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.result")), "结果: ");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.next_step")), "下一步: ");
-//
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_data_components")), "未知或损坏的数据组件");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_item")), "未知的物品");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.activated")), "已激活");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unactivated")), "未激活");
     }
 }

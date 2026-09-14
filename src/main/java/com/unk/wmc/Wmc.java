@@ -2,6 +2,7 @@ package com.unk.wmc;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
+import com.unk.wmc.api.recipe.RandomBlueprintRecipeRegistry;
 import com.unk.wmc.block.WmcBlocks;
 import com.unk.wmc.block.entity.WmcBlockEntityTypes;
 import com.unk.wmc.command.WmcDebugCommand;
@@ -14,10 +15,12 @@ import com.unk.wmc.loot.glm.WmcGlobalLootModifierSerializers;
 import com.unk.wmc.menu.WmcMenuTypes;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
@@ -26,6 +29,8 @@ import org.slf4j.Logger;
 public class Wmc {
     public static final String MOD_ID = "wmc";
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final RandomBlueprintRecipeRegistry REGISTRY = new RandomBlueprintRecipeRegistry();
 
     public Wmc(IEventBus modEventBus, ModContainer modContainer) {
         WmcBlocks.BLOCKS.register(modEventBus);
@@ -42,7 +47,9 @@ public class Wmc {
 
         WmcDataComponentTypes.DATA_COMPONENT_TYPES.register(modEventBus);
 
-        NeoForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::onCommonSetup);
+
+        NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
     }
 
     @SubscribeEvent
@@ -51,5 +58,20 @@ public class Wmc {
         CommandBuildContext context = event.getBuildContext();
 
         WmcDebugCommand.register(dispatcher, context);
+    }
+
+    @SubscribeEvent
+    public void onCommonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(Wmc::registerRecipe);
+    }
+
+    public static void registerRecipe() {
+        REGISTRY.register(
+                ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "random_blueprint"),
+                new RandomBlueprintRecipeRegistry.ResultInfo(
+                        128,
+                        WmcItems.RANDOM_CORE.get()
+                )
+        );
     }
 }

@@ -12,9 +12,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class WmcRecipeSerializers {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, Wmc.MOD_ID);
 
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AltarCraftingRecipe>> ALTAR_RECIPE_SERIALIZER =
-            SERIALIZERS.register("altar_recipe", AltarCraftingRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AltarCraftingRecipe>> ALTAR_RECIPE =
+            SERIALIZERS.register("crafting_altar", AltarCraftingRecipe.Serializer::new);
 
-    public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<SmithingTemplateRecipe>> SMITHING_TEMPLATE_RECIPE_SERIALIZER =
-            SERIALIZERS.register("smithing_template_recipe", () -> new SimpleCraftingRecipeSerializer<>(SmithingTemplateRecipe::new));
+    public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<SmithingTemplateRecipe>> SMITHING_TEMPLATE_FROM_CORE =
+            SERIALIZERS.register("crafting_special_smithing_template", () -> new SimpleCraftingRecipeSerializer<>(SmithingTemplateRecipe::new));
 }

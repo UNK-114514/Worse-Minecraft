@@ -2,9 +2,9 @@ package com.unk.wmc.item;
 
 import com.unk.wmc.Wmc;
 import com.unk.wmc.item.custom.BlueprintItem;
+import com.unk.wmc.item.custom.SmithingTemplateCoreItem;
 import com.unk.wmc.item.custom.SmithingTemplateDustItem;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,9 +18,11 @@ public class WmcItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Wmc.MOD_ID);
 
     public static final DeferredItem<Item> SMITHING_TEMPLATE_DUST = ITEMS.register("smithing_template_dust", () -> new SmithingTemplateDustItem(new Item.Properties()));
+    public static final DeferredItem<Item> SMITHING_TEMPLATE_CORE = ITEMS.register("smithing_template_core", () -> new SmithingTemplateCoreItem(new Item.Properties()));
     public static final DeferredItem<Item> EMPTY_SMITING_TEMPLATE = ITEMS.register("empty_smithing_template", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BLUEPRINT = ITEMS.register("blueprint", () -> new BlueprintItem(new Item.Properties()));
     public static final DeferredItem<Item> RANDOM_BLUEPRINT = ITEMS.register("random_blueprint", () -> new BlueprintItem(new Item.Properties()));
+    public static final DeferredItem<Item> RANDOM_CORE = ITEMS.register("random_core", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> RAW_TERMINUS_INGOT = ITEMS.register("raw_terminus_ingot", () -> new Item(new Item.Properties()));
 
@@ -37,11 +39,11 @@ public class WmcItems {
 
     public static final DeferredItem<Item> TERMINUS_UPGRADE_SMITHING_TEMPLATE =
             ITEMS.register("terminus_upgrade_smithing_template", () -> new SmithingTemplateItem(
-                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.applies_to"))).withStyle(ChatFormatting.BLUE),
-                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.ingredients"))).withStyle(ChatFormatting.BLUE),
-                    Component.translatable(Util.makeDescriptionId("upgrade", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "terminus_upgrade"))).withStyle(ChatFormatting.GRAY),
-                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.base_slot_description"))),
-                    Component.translatable(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.additions_slot_description"))),
+                    Component.translatable("item.wmc.smithing_template.terminus_upgrade.applies_to").withStyle(ChatFormatting.BLUE),
+                    Component.translatable("item.wmc.smithing_template.terminus_upgrade.ingredients").withStyle(ChatFormatting.BLUE),
+                    Component.translatable("upgrade.wmc.terminus_upgrade").withStyle(ChatFormatting.GRAY),
+                    Component.translatable("item.wmc.smithing_template.terminus_upgrade.base_slot_description"),
+                    Component.translatable("item.wmc.smithing_template.terminus_upgrade.additions_slot_description"),
                     List.of(
                             ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
                             ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),

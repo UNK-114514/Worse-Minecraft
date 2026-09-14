@@ -1,6 +1,5 @@
 package com.unk.wmc.item.custom;
 
-import com.unk.wmc.component.ActivatableData;
 import com.unk.wmc.component.SimpleItemData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ComponentHelper;
@@ -14,17 +13,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SmithingTemplateDustItem extends Item {
-    public SmithingTemplateDustItem(Properties properties) {
+public class SmithingTemplateCoreItem extends Item {
+    public SmithingTemplateCoreItem(Properties properties) {
         super(properties);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
-        ActivatableData activatableData = stack.get(WmcDataComponentTypes.ACTIVATABLE);
         SimpleItemData simpleItemData = stack.get(WmcDataComponentTypes.SIMPLE_ITEM);
 
-        if (activatableData == null || simpleItemData == null) return;
+        if (simpleItemData == null) return;
 
         Item item = ItemStackHelper.fromResourceLocation(simpleItemData.itemId());
 
@@ -35,6 +33,5 @@ public class SmithingTemplateDustItem extends Item {
         }
 
         components.add(template.upgradeDescription);
-        components.add(activatableData.isActivated() ? ComponentHelper.ACTIVATED : ComponentHelper.UNACTIVATED);
     }
 }

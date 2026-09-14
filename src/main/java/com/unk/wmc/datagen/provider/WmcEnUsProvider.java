@@ -14,6 +14,7 @@ public class WmcEnUsProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add(WmcItems.SMITHING_TEMPLATE_DUST.get(), "Smiting Template Dust");
+        add(WmcItems.SMITHING_TEMPLATE_CORE.get(), "Smiting Template Core");
         add(WmcItems.EMPTY_SMITING_TEMPLATE.get(), "Empty Smiting Template");
         add(WmcItems.BLUEPRINT.get(), "Blueprint");
         add(WmcItems.RANDOM_BLUEPRINT.get(), "Random Blueprint");
@@ -50,20 +51,5 @@ public class WmcEnUsProvider extends LanguageProvider {
         add("item.wmc.general.unknown_item", "Unknown Item");
         add("item.wmc.general.activated", "Activated");
         add("item.wmc.general.unactivated", "Unactivated");
-
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.applies_to")), "Netherite Equipment");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.ingredients")), "Terminus Ingot");
-//        add(Util.makeDescriptionId("upgrade", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "terminus_upgrade")), "Terminus Upgrade");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.base_slot_description")), "Add netherite armor, weapon, or tool");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "smithing_template.terminus_upgrade.additions_slot_description")), "Add Terminus Ingot");
-//
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.progress")), "Progress: ");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.result")), "Result: ");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.next_step")), "Next Step: ");
-//
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_data_components")), "Unknown Or Broken Data Components");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_item")), "Unknown Item");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.activated")), "Activated");
-//        add(Util.makeDescriptionId("item", ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unactivated")), "Unactivated");
     }
 }

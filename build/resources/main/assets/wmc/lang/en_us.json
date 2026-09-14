@@ -23,6 +23,7 @@
   "item.wmc.smithing_template.terminus_upgrade.applies_to": "Netherite Equipment",
   "item.wmc.smithing_template.terminus_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
   "item.wmc.smithing_template.terminus_upgrade.ingredients": "Terminus Ingot",
+  "item.wmc.smithing_template_core": "Smiting Template Core",
   "item.wmc.smithing_template_dust": "Smiting Template Dust",
   "item.wmc.terminus_ingot": "Terminus Ingot",
   "item.wmc.terminus_nugget": "Terminus Nugget",

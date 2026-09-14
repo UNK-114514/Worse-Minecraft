@@ -55,7 +55,7 @@ public class ActivateAltarBlock extends SimpleDisplayBlock implements EntityBloc
         if (!(level.getBlockEntity(pos) instanceof ActivateAltarBlockEntity be)) return;
 
         Optional<RecipeHolder<AltarCraftingRecipe>> optional = level.getRecipeManager().getRecipeFor(
-                WmcRecipeTypes.ALTAR_RECIPE_TYPE.get(),
+                WmcRecipeTypes.ALTAR_CRAFTING.get(),
                 be.getInput(),
                 level
         );

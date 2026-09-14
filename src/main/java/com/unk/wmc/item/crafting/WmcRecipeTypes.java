@@ -11,5 +11,5 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class WmcRecipeTypes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, Wmc.MOD_ID);
 
-    public static final DeferredHolder<RecipeType<?>, RecipeType<AltarCraftingRecipe>> ALTAR_RECIPE_TYPE = RECIPE_TYPES.register("altar_crafting_type", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "altar_crafting_type")));
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AltarCraftingRecipe>> ALTAR_CRAFTING = RECIPE_TYPES.register("altar_crafting", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "altar_crafting_type")));
 }

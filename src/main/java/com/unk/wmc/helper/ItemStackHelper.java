@@ -101,4 +101,13 @@ public class ItemStackHelper {
         }
         return null;
     }
+
+    public static ItemStack getRandomBlueprint(int count) {
+        ItemStack result = WmcItems.BLUEPRINT.get().getDefaultInstance();
+        BlueprintData.BlueprintComponentBuilder builder = new BlueprintData.BlueprintComponentBuilder(WmcItems.RANDOM_BLUEPRINT.get());
+
+        result.set(WmcDataComponentTypes.BLUEPRINT, builder.getRandom(count));
+
+        return result;
+    }
 }

@@ -1,8 +1,6 @@
 package com.unk.wmc.helper;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -17,39 +15,15 @@ import java.util.List;
 public class ComponentHelper {
     public static final Component UNKNOWN_DATA_COMPONENTS =
             Component.translatable("item.wmc.general.unknown_data_components").withStyle(ChatFormatting.RED);
-//            Component.translatable(
-//                    Util.makeDescriptionId(
-//                            "item",
-//                            ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_data_components")
-//                    )
-//            ).withStyle(ChatFormatting.RED);
 
     public static final Component UNKNOWN_ITEM =
             Component.translatable("item.wmc.general.unknown_item").withStyle(ChatFormatting.RED);
-//            Component.translatable(
-//                    Util.makeDescriptionId(
-//                            "item",
-//                            ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unknown_item")
-//                    )
-//            ).withStyle(ChatFormatting.RED);
 
     public static final Component ACTIVATED =
             Component.translatable("item.wmc.general.activated").withStyle(ChatFormatting.GREEN);
-//            Component.translatable(
-//                    Util.makeDescriptionId(
-//                            "item",
-//                            ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.activated")
-//                    )
-//            ).withStyle(ChatFormatting.GREEN);
 
     public static final Component UNACTIVATED =
             Component.translatable("item.wmc.general.unactivated").withStyle(ChatFormatting.RED);
-//            Component.translatable(
-//                    Util.makeDescriptionId(
-//                            "item",
-//                            ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "general.unactivated")
-//                    )
-//            ).withStyle(ChatFormatting.RED);
 
     public static void addItemTooltip(
             @NotNull ItemStack stack, @NotNull Item.TooltipContext tooltipContext,
@@ -108,10 +82,5 @@ public class ComponentHelper {
         item.appendHoverText(stack, Item.TooltipContext.EMPTY, emptyComponents, tooltipFlag);
 
         return !emptyComponents.isEmpty();
-    }
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public static boolean hasTabDown() {
-        return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), 258);
     }
 }

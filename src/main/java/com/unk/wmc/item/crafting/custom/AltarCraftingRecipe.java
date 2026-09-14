@@ -51,12 +51,12 @@ public record AltarCraftingRecipe(ItemStack n, ItemStack en, ItemStack e, ItemSt
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return WmcRecipeSerializers.ALTAR_RECIPE_SERIALIZER.get();
+        return WmcRecipeSerializers.ALTAR_RECIPE.get();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return WmcRecipeTypes.ALTAR_RECIPE_TYPE.get();
+        return WmcRecipeTypes.ALTAR_CRAFTING.get();
     }
 
     @Override

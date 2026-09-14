@@ -26,7 +26,7 @@ public class SmitingTemplateRecipeMaker {
     public static List<RecipeHolder<CraftingRecipe>> createRecipes(IJeiHelpers jeiHelpers) {
         IVanillaRecipeFactory vanillaRecipeFactory = jeiHelpers.getVanillaRecipeFactory();
 
-        String group = "jei.smithing_dust";
+        String group = "jei.smithing_core";
 
         List<RecipeHolder<CraftingRecipe>> recipeHolders = new ArrayList<>();
 
@@ -35,11 +35,11 @@ public class SmitingTemplateRecipeMaker {
         for (Holder<Item> itemHolder : BuiltInRegistries.ITEM.getTag(WmcItemTags.SMITHING_TEMPLATES).get()) {
             Item item = itemHolder.value();
 
-            ItemStack dust = WmcItems.SMITHING_TEMPLATE_DUST.get().getDefaultInstance();
-            dust.set(WmcDataComponentTypes.SIMPLE_ITEM, new SimpleItemData(BuiltInRegistries.ITEM.getKey(item)));
+            ItemStack core = WmcItems.SMITHING_TEMPLATE_CORE.get().getDefaultInstance();
+            core.set(WmcDataComponentTypes.SIMPLE_ITEM, new SimpleItemData(BuiltInRegistries.ITEM.getKey(item)));
 
-            Ingredient dustIngredient = DataComponentIngredient.of(false, dust);
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "jei.smithing_dust." + item.getDescriptionId());
+            Ingredient coreIngredient = DataComponentIngredient.of(false, core);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "jei.smithing_core." + item.getDescriptionId());
 
             CraftingRecipe recipe = vanillaRecipeFactory.createShapedRecipeBuilder(CraftingBookCategory.MISC, List.of(item.getDefaultInstance()))
                     .group(group)
@@ -47,7 +47,7 @@ public class SmitingTemplateRecipeMaker {
                     .pattern("aea")
                     .pattern("aaa")
                     .define('a', Ingredient.of(Blocks.DIAMOND_BLOCK))
-                    .define('d', dustIngredient)
+                    .define('d', coreIngredient)
                     .define('e', Ingredient.of(WmcItems.EMPTY_SMITING_TEMPLATE))
                     .build();
             recipeHolders.add(new RecipeHolder<>(id, recipe));

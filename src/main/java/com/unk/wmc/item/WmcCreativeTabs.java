@@ -19,7 +19,7 @@ public class WmcCreativeTabs {
 
     public static final Supplier<CreativeModeTab> WST_CREATIVE_TAB = CREATIVE_MODE_TABS.register("wst_tab",
             () -> CreativeModeTab.builder()
-                    .title(Component.literal("Wmc Tab"))
+                    .title(Component.literal("Worse Minecraft"))
                     .icon(() -> {
                         ItemStack stack = new ItemStack(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE);
                         stack.applyComponents(
