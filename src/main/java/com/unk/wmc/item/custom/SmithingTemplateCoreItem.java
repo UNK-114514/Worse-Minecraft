@@ -1,9 +1,8 @@
 package com.unk.wmc.item.custom;
 
-import com.unk.wmc.component.SimpleItemData;
+import com.unk.wmc.component.SimpleItemStackData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ComponentHelper;
-import com.unk.wmc.helper.ItemStackHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,13 +19,12 @@ public class SmithingTemplateCoreItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
-        SimpleItemData simpleItemData = stack.get(WmcDataComponentTypes.SIMPLE_ITEM);
+        SimpleItemStackData simpleItemStackData = stack.get(WmcDataComponentTypes.SIMPLE_ITEM_STACK);
 
-        if (simpleItemData == null) return;
+        if (simpleItemStackData == null) return;
 
-        Item item = ItemStackHelper.fromResourceLocation(simpleItemData.itemId());
+        Item item = simpleItemStackData.stack().getItem();
 
-        if (item == null) return;
         if (!(item instanceof SmithingTemplateItem template)) {
             ComponentHelper.addItemTooltip(item.getDefaultInstance(), tooltipContext, components, tooltipFlag);
             return;

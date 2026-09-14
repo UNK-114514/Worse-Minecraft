@@ -6,8 +6,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,53 +15,53 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record BlueprintData(
-        ResourceLocation itemId, List<ResourceLocation> remainingSteps,
-        List<ResourceLocation> completedSteps) {
+        ItemStack stack, List<ItemStack> remainingSteps,
+        List<ItemStack> completedSteps) {
     public static final Codec<BlueprintData> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-            ResourceLocation.CODEC.fieldOf("item").forGetter(BlueprintData::itemId),
-            ResourceLocation.CODEC.listOf().fieldOf("remaining_steps").forGetter(BlueprintData::remainingSteps),
-            ResourceLocation.CODEC.listOf().fieldOf("completed_steps").forGetter(BlueprintData::completedSteps)
+            ItemStack.SIMPLE_ITEM_CODEC.fieldOf("item").forGetter(BlueprintData::stack),
+            ItemStack.SIMPLE_ITEM_CODEC.listOf().fieldOf("remaining_steps").forGetter(BlueprintData::remainingSteps),
+            ItemStack.SIMPLE_ITEM_CODEC.listOf().fieldOf("completed_steps").forGetter(BlueprintData::completedSteps)
     ).apply(inst, BlueprintData::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, BlueprintData> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, BlueprintData::itemId,
-            ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()), BlueprintData::remainingSteps,
-            ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()), BlueprintData::completedSteps,
+            ItemStack.STREAM_CODEC, BlueprintData::stack,
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), BlueprintData::remainingSteps,
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), BlueprintData::completedSteps,
             BlueprintData::new
     );
 
     public static class BlueprintComponentBuilder {
-        private final LinkedList<ResourceLocation> remainingSteps = new LinkedList<>();
-        private final LinkedList<ResourceLocation> completedSteps = new LinkedList<>();
-        private final ResourceLocation itemId;
-        private final Item item;
+        private final LinkedList<ItemStack> remainingSteps = new LinkedList<>();
+        private final LinkedList<ItemStack> completedSteps = new LinkedList<>();
+        private final ItemStack stack;
+
+        public BlueprintComponentBuilder(ItemStack stack) {
+            this.stack = stack;
+        }
 
         public BlueprintComponentBuilder(Item item) {
-            this.itemId = BuiltInRegistries.ITEM.getKey(item);
-            this.item = item;
+            this(item.getDefaultInstance());
         }
 
         public BlueprintComponentBuilder addStep(Item item) {
-            ResourceLocation loc = BuiltInRegistries.ITEM.getKey(item);
-            remainingSteps.add(loc);
+            remainingSteps.add(item.getDefaultInstance());
             return this;
         }
 
         public BlueprintComponentBuilder completeStep(Item item) {
-            ResourceLocation loc = BuiltInRegistries.ITEM.getKey(item);
-            completedSteps.add(loc);
+            completedSteps.add(item.getDefaultInstance());
             return this;
         }
 
         public BlueprintData build() {
-            return new BlueprintData(itemId, remainingSteps, completedSteps);
+            return new BlueprintData(stack, remainingSteps, completedSteps);
         }
 
         public BlueprintData getRandom(int length) {
             int maxLength = Math.min(length, BuiltInRegistries.ITEM.size());
 
             BlueprintComponentBuilder builder =
-                    new BlueprintComponentBuilder(item);
+                    new BlueprintComponentBuilder(stack);
 
             List<Item> allItems = BuiltInRegistries.ITEM.stream().collect(Collectors.toList());
 

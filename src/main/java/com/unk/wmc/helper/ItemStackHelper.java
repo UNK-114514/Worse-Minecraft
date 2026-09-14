@@ -2,7 +2,7 @@ package com.unk.wmc.helper;
 
 import com.unk.wmc.component.ActivatableData;
 import com.unk.wmc.component.BlueprintData;
-import com.unk.wmc.component.SimpleItemData;
+import com.unk.wmc.component.SimpleItemStackData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.item.WmcItems;
 import net.minecraft.ChatFormatting;
@@ -47,9 +47,7 @@ public class ItemStackHelper {
 
     public static ItemStack getDustOf(Item item, boolean isActivated) {
         ItemStack result = new ItemStack(WmcItems.SMITHING_TEMPLATE_DUST.get());
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-
-        result.set(WmcDataComponentTypes.SIMPLE_ITEM.get(), new SimpleItemData(location));
+        result.set(WmcDataComponentTypes.SIMPLE_ITEM_STACK.get(), new SimpleItemStackData(item.getDefaultInstance()));
         result.set(WmcDataComponentTypes.ACTIVATABLE.get(), new ActivatableData(isActivated));
 
         return result;
@@ -73,23 +71,18 @@ public class ItemStackHelper {
         BlueprintData data = copy.get(WmcDataComponentTypes.BLUEPRINT);
 
         if (data == null) return copy;
-        if (!BuiltInRegistries.ITEM.containsKey(data.itemId())) return stack;
         if (data.remainingSteps().size() <= 1) {
-            ResourceLocation resultLoc = data.itemId();
-            Item result = fromResourceLocation(resultLoc);
-            if (result != null) {
-                return result.getDefaultInstance();
-            }
-            return stack;
+            Item result = data.stack().getItem();
+            return result.getDefaultInstance();
         }
 
-        List<ResourceLocation> remaining = new LinkedList<>(data.remainingSteps());
-        ResourceLocation step = remaining.removeFirst();
+        List<ItemStack> remaining = new LinkedList<>(data.remainingSteps());
+        ItemStack step = remaining.removeFirst();
 
-        List<ResourceLocation> completed = new LinkedList<>(data.completedSteps());
+        List<ItemStack> completed = new LinkedList<>(data.completedSteps());
         completed.add(step);
 
-        BlueprintData newData = new BlueprintData(data.itemId(), remaining, completed);
+        BlueprintData newData = new BlueprintData(data.stack(), remaining, completed);
         copy.set(WmcDataComponentTypes.BLUEPRINT.get(), newData);
 
         return copy;

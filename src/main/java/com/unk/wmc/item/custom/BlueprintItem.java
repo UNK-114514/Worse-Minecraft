@@ -3,12 +3,10 @@ package com.unk.wmc.item.custom;
 import com.unk.wmc.component.BlueprintData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ComponentHelper;
-import com.unk.wmc.helper.ItemStackHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -44,10 +42,8 @@ public class BlueprintItem extends Item {
             return;
         }
 
-        ResourceLocation nextItemLoc = blueprintData.remainingSteps().getFirst();
-
-        Item nextItem = ItemStackHelper.fromResourceLocation(nextItemLoc);
-        Item resultItem = ItemStackHelper.fromResourceLocation(blueprintData.itemId());
+        Item nextItem = blueprintData.remainingSteps().getFirst().getItem();
+        Item resultItem = blueprintData.stack().getItem();
 
         Component progressInfo = Component.translatable("item.wmc.blueprint.description.progress")
                 .append(
@@ -56,40 +52,13 @@ public class BlueprintItem extends Item {
                                 + (blueprintData.remainingSteps().size() + blueprintData.completedSteps().size())
                 ).withStyle(ChatFormatting.GREEN);
 
-//        Component progressInfo =
-//                Component.translatable(
-//                        Util.makeDescriptionId(
-//                                "item",
-//                                ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.progress")
-//                        )
-//                ).append(
-//                        blueprintData.completedSteps().size()
-//                        + "/"
-//                        + (blueprintData.remainingSteps().size() + blueprintData.completedSteps().size())
-//                ).withStyle(ChatFormatting.GREEN);
-
         components.add(Component.translatable("item.wmc.blueprint.description.result").withStyle(ChatFormatting.BLUE));
-
-//        components.add(
-//                Component.translatable(
-//                        Util.makeDescriptionId(
-//                                "item",
-//                                ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.result")
-//                        )
-//                ).withStyle(ChatFormatting.BLUE));
 
         ComponentHelper.addItemTooltip(resultItem, tooltipContext, components, tooltipFlag);
 
         components.add(CommonComponents.EMPTY);
 
         components.add(Component.translatable("item.wmc.blueprint.description.next_step").withStyle(ChatFormatting.BLUE));
-
-//        components.add(Component.translatable(
-//                Util.makeDescriptionId(
-//                        "item",
-//                        ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "blueprint.description.next_step")
-//                )
-//        ).withStyle(ChatFormatting.BLUE));
 
         ComponentHelper.addItemTooltip(nextItem, tooltipContext, components, tooltipFlag);
         components.add(progressInfo);
@@ -103,9 +72,8 @@ public class BlueprintItem extends Item {
             return;
         }
 
-        for (ResourceLocation loc : blueprintData.remainingSteps()) {
-            Item nextItem = ItemStackHelper.fromResourceLocation(loc);
-            ComponentHelper.addItemTooltip(nextItem, tooltipContext, components, tooltipFlag);
+        for (ItemStack stack : blueprintData.remainingSteps()) {
+            ComponentHelper.addItemTooltip(stack, tooltipContext, components, tooltipFlag);
         }
     }
 }

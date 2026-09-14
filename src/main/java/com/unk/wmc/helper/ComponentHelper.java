@@ -57,22 +57,7 @@ public class ComponentHelper {
             return;
         }
 
-        ItemStack stack = item.getDefaultInstance();
-
-        Component hoverText = stack.getHoverName();
-        List<Component> itemHoverText = new ArrayList<>();
-
-        if (!Screen.hasControlDown() || !hasTooltip(stack, tooltipFlag)) {
-            components.add(hoverText.copy().withStyle(ChatFormatting.GRAY));
-            return;
-        }
-
-        if (hasTooltip(stack, tooltipFlag)) {
-            components.add(hoverText.copy().append(Component.literal(" [↓]").withStyle(ChatFormatting.GREEN)));
-            stack.getItem().appendHoverText(stack, tooltipContext, itemHoverText, tooltipFlag);
-
-            itemHoverText.forEach(component -> components.add(Component.literal(" ").append(component)));
-        }
+        addItemTooltip(item.getDefaultInstance(), tooltipContext, components, tooltipFlag);
     }
 
     public static boolean hasTooltip(ItemStack stack, TooltipFlag tooltipFlag) {

@@ -1,7 +1,7 @@
 package com.unk.wmc.compat.jei.replacer;
 
 import com.unk.wmc.Wmc;
-import com.unk.wmc.component.SimpleItemData;
+import com.unk.wmc.component.SimpleItemStackData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.item.WmcItemTags;
 import com.unk.wmc.item.WmcItems;
@@ -36,7 +36,7 @@ public class SmitingTemplateRecipeMaker {
             Item item = itemHolder.value();
 
             ItemStack core = WmcItems.SMITHING_TEMPLATE_CORE.get().getDefaultInstance();
-            core.set(WmcDataComponentTypes.SIMPLE_ITEM, new SimpleItemData(BuiltInRegistries.ITEM.getKey(item)));
+            core.set(WmcDataComponentTypes.SIMPLE_ITEM_STACK, new SimpleItemStackData(item.getDefaultInstance()));
 
             Ingredient coreIngredient = DataComponentIngredient.of(false, core);
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "jei.smithing_core." + item.getDescriptionId());

@@ -1,8 +1,7 @@
 package com.unk.wmc.item.crafting.custom;
 
-import com.unk.wmc.component.SimpleItemData;
+import com.unk.wmc.component.SimpleItemStackData;
 import com.unk.wmc.component.WmcDataComponentTypes;
-import com.unk.wmc.helper.ItemStackHelper;
 import com.unk.wmc.helper.RecipeHelper;
 import com.unk.wmc.item.WmcItemTags;
 import com.unk.wmc.item.WmcItems;
@@ -53,14 +52,12 @@ public class SmithingTemplateRecipe extends CustomRecipe {
 
     @Override
     public @NotNull ItemStack assemble(@NotNull CraftingInput craftingInput, HolderLookup.@NotNull Provider provider) {
-        ItemStack dustItemStack = craftingInput.getItem(1, 0);
-        SimpleItemData data = dustItemStack.get(WmcDataComponentTypes.SIMPLE_ITEM);
+        ItemStack coreItem = craftingInput.getItem(1, 0);
+        SimpleItemStackData data = coreItem.get(WmcDataComponentTypes.SIMPLE_ITEM_STACK);
 
-        if (!dustItemStack.is(WmcItems.SMITHING_TEMPLATE_DUST)) return ItemStack.EMPTY;
         if (data == null) return ItemStack.EMPTY;
 
-        Item result = ItemStackHelper.fromResourceLocation(data.itemId());
-        if (result == null) return ItemStack.EMPTY;
+        Item result = data.stack().getItem();
         if (!result.getDefaultInstance().is(WmcItemTags.SMITHING_TEMPLATES)) return ItemStack.EMPTY;
 
         return result.getDefaultInstance();

@@ -23,9 +23,9 @@ public class WmcDataComponentTypes {
                     .networkSynchronized(BlueprintData.STREAM_CODEC)
             );
 
-    public static final Supplier<DataComponentType<SimpleItemData>> SIMPLE_ITEM =
-            DATA_COMPONENT_TYPES.registerComponentType("simple_item", builder -> builder
-                    .persistent(SimpleItemData.CODEC)
-                    .networkSynchronized(SimpleItemData.STREAM_CODEC)
+    public static final Supplier<DataComponentType<SimpleItemStackData>> SIMPLE_ITEM_STACK =
+            DATA_COMPONENT_TYPES.registerComponentType("simple_item_stack", builder -> builder
+                    .persistent(SimpleItemStackData.CODEC)
+                    .networkSynchronized(SimpleItemStackData.STREAM_CODEC)
             );
 }

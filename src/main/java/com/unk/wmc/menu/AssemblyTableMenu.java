@@ -5,8 +5,6 @@ import com.unk.wmc.component.BlueprintData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ItemStackHelper;
 import com.unk.wmc.item.WmcItems;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -60,11 +58,7 @@ public class AssemblyTableMenu extends ItemCombinerMenu {
         if (blueprintData == null) return;
         if (blueprintData.remainingSteps().isEmpty()) return;
 
-        ResourceLocation location = blueprintData.remainingSteps().getFirst();
-
-        if (!BuiltInRegistries.ITEM.containsKey(location)) return;
-
-        Item requiredItem = BuiltInRegistries.ITEM.get(location);
+        Item requiredItem = blueprintData.remainingSteps().getFirst().getItem();
 
         if (requiredItem == slot0.getItem()) {
             this.resultSlots.setItem(2, ItemStackHelper.doNextStep(slot1));

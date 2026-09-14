@@ -71,7 +71,7 @@ public class WmcJeiPlugin implements IModPlugin {
                 VanillaTypes.ITEM_STACK,
                 WmcItems.SMITHING_TEMPLATE_DUST.get(),
                 new DataComponentsSubtypeInterpreter(
-                        WmcDataComponentTypes.SIMPLE_ITEM.get(),
+                        WmcDataComponentTypes.SIMPLE_ITEM_STACK.get(),
                         WmcDataComponentTypes.ACTIVATABLE.get()
                 )
         );
@@ -80,7 +80,7 @@ public class WmcJeiPlugin implements IModPlugin {
                 VanillaTypes.ITEM_STACK,
                 WmcItems.SMITHING_TEMPLATE_CORE.get(),
                 new DataComponentsSubtypeInterpreter(
-                        WmcDataComponentTypes.SIMPLE_ITEM.get()
+                        WmcDataComponentTypes.SIMPLE_ITEM_STACK.get()
                 )
         );
     }
