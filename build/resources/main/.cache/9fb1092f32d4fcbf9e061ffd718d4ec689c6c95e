@@ -1,16 +1,16 @@
-// 1.21.1	2026-09-14T20:23:58.05577	Recipes
+// 1.21.1	2026-09-15T19:18:07.3239834	Recipes
 0a81e7b5c5f73a060fb2a4b9d95e465cd2ac977b data/wmc/advancement/recipes/activate_silence_armor_trim_smithing_template.json
 f0e770e0630418ef525ec7624249a2879cd3b7f9 data/wmc/advancement/recipes/misc/copper_cogwheel.json
 420068e8fc1fa58d91b3223c2e59682bf3455a6d data/wmc/advancement/recipes/misc/diamond_cogwheel.json
 1d0d92bc591d172f251b0a41a7a87ff12595711d data/wmc/advancement/recipes/misc/gold_cogwheel.json
 d83f74b22b82d70a26462eabd9e91fda8a88ad1e data/wmc/advancement/recipes/misc/iron_cogwheel.json
 5f26c1c2964391572d4107e4af2bb02d4649edb8 data/wmc/advancement/recipes/misc/netherite_cogwheel.json
-8a8845ae777236696b374b11069e26f3bf311f01 data/wmc/advancement/recipes/misc/random_blueprint.json
-ee817199eea5348f4f19bed832ff1d3f412a327a data/wmc/recipe/activate_silence_armor_trim_smithing_template.json
+9c9f34e7b8f536f04f7f03f331d584527bfcb11b data/wmc/advancement/recipes/misc/random_128_contains_random_core.json
+e1db175b584a3a0e95edd7cda3f8f22525944d52 data/wmc/recipe/activate_silence_armor_trim_smithing_template.json
 aeb071973a511d8679da0751a8d19721fe832752 data/wmc/recipe/copper_cogwheel.json
 2b77369a89bc67f87ea24338e95b80dc9e8a7da4 data/wmc/recipe/diamond_cogwheel.json
 b023c8656c4fb5d09da31a7b65809b3a8f435c29 data/wmc/recipe/gold_cogwheel.json
 ba996be931eac39c0b8815f53804f07acbb80a47 data/wmc/recipe/iron_cogwheel.json
 678760fe696a4ba9d6d64f6572251e80bd6c65ba data/wmc/recipe/netherite_cogwheel.json
-d003b3adf306148bca2906efd3c89f07d93ed7e6 data/wmc/recipe/random_blueprint.json
+b0881ecccb33a900bf0f5708f6e2faf848a7c2b3 data/wmc/recipe/random_128_contains_random_core.json
 79a9466d84d0afaa6d15ea7da898ec360f61aa12 data/wmc/recipe/template_from_dust.json

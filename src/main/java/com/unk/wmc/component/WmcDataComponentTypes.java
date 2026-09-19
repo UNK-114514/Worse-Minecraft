@@ -1,8 +1,10 @@
 package com.unk.wmc.component;
 
+import com.mojang.serialization.Codec;
 import com.unk.wmc.Wmc;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -15,6 +17,12 @@ public class WmcDataComponentTypes {
             DATA_COMPONENT_TYPES.registerComponentType("activatable", builder -> builder
                     .persistent(ActivatableData.CODEC)
                     .networkSynchronized(ActivatableData.STREAM_CODEC)
+            );
+
+    public static final Supplier<DataComponentType<Integer>> ABILITY =
+            DATA_COMPONENT_TYPES.registerComponentType("ability", builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT)
             );
 
     public static final Supplier<DataComponentType<BlueprintData>> BLUEPRINT =

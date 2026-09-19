@@ -4,6 +4,7 @@ import com.unk.wmc.Wmc;
 import com.unk.wmc.item.custom.BlueprintItem;
 import com.unk.wmc.item.custom.SmithingTemplateCoreItem;
 import com.unk.wmc.item.custom.SmithingTemplateDustItem;
+import com.unk.wmc.item.custom.TerminusSwordItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,7 @@ public class WmcItems {
     public static final DeferredItem<Item> DIAMOND_COGWHEEL = ITEMS.register("diamond_cogwheel", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> NETHERITE_COGWHEEL = ITEMS.register("netherite_cogwheel", () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> TERMINUS_SWORD = ITEMS.register("terminus_sword", () -> new TerminusSwordItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> TERMINUS_UPGRADE_SMITHING_TEMPLATE =
             ITEMS.register("terminus_upgrade_smithing_template", () -> new SmithingTemplateItem(

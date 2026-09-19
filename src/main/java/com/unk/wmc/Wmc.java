@@ -2,7 +2,6 @@ package com.unk.wmc;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.logging.LogUtils;
-import com.unk.wmc.api.recipe.RandomBlueprintRecipeRegistry;
 import com.unk.wmc.block.WmcBlocks;
 import com.unk.wmc.block.entity.WmcBlockEntityTypes;
 import com.unk.wmc.command.WmcDebugCommand;
@@ -15,7 +14,6 @@ import com.unk.wmc.loot.glm.WmcGlobalLootModifierSerializers;
 import com.unk.wmc.menu.WmcMenuTypes;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -29,8 +27,6 @@ import org.slf4j.Logger;
 public class Wmc {
     public static final String MOD_ID = "wmc";
     public static final Logger LOGGER = LogUtils.getLogger();
-
-    public static final RandomBlueprintRecipeRegistry REGISTRY = new RandomBlueprintRecipeRegistry();
 
     public Wmc(IEventBus modEventBus, ModContainer modContainer) {
         WmcBlocks.BLOCKS.register(modEventBus);
@@ -62,16 +58,6 @@ public class Wmc {
 
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(Wmc::registerRecipe);
-    }
 
-    public static void registerRecipe() {
-        REGISTRY.register(
-                ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "random_blueprint"),
-                new RandomBlueprintRecipeRegistry.ResultInfo(
-                        128,
-                        WmcItems.RANDOM_CORE.get()
-                )
-        );
     }
 }

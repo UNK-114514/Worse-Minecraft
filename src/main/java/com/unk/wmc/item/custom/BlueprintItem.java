@@ -42,8 +42,8 @@ public class BlueprintItem extends Item {
             return;
         }
 
-        Item nextItem = blueprintData.remainingSteps().getFirst().getItem();
-        Item resultItem = blueprintData.stack().getItem();
+        ItemStack nextStack = blueprintData.remainingSteps().getFirst();
+        ItemStack resultStack = blueprintData.result();
 
         Component progressInfo = Component.translatable("item.wmc.blueprint.description.progress")
                 .append(
@@ -54,13 +54,13 @@ public class BlueprintItem extends Item {
 
         components.add(Component.translatable("item.wmc.blueprint.description.result").withStyle(ChatFormatting.BLUE));
 
-        ComponentHelper.addItemTooltip(resultItem, tooltipContext, components, tooltipFlag);
+        ComponentHelper.addTooltip(resultStack, tooltipContext, components, tooltipFlag);
 
         components.add(CommonComponents.EMPTY);
 
         components.add(Component.translatable("item.wmc.blueprint.description.next_step").withStyle(ChatFormatting.BLUE));
 
-        ComponentHelper.addItemTooltip(nextItem, tooltipContext, components, tooltipFlag);
+        ComponentHelper.addTooltip(nextStack, tooltipContext, components, tooltipFlag);
         components.add(progressInfo);
     }
 
@@ -72,8 +72,8 @@ public class BlueprintItem extends Item {
             return;
         }
 
-        for (ItemStack stack : blueprintData.remainingSteps()) {
-            ComponentHelper.addItemTooltip(stack, tooltipContext, components, tooltipFlag);
+        for (ItemStack step : blueprintData.remainingSteps()) {
+            ComponentHelper.addTooltip(step, tooltipContext, components, tooltipFlag);
         }
     }
 }

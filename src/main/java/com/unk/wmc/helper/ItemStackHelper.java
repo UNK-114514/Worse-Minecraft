@@ -72,7 +72,7 @@ public class ItemStackHelper {
 
         if (data == null) return copy;
         if (data.remainingSteps().size() <= 1) {
-            Item result = data.stack().getItem();
+            Item result = data.result().getItem();
             return result.getDefaultInstance();
         }
 
@@ -82,7 +82,7 @@ public class ItemStackHelper {
         List<ItemStack> completed = new LinkedList<>(data.completedSteps());
         completed.add(step);
 
-        BlueprintData newData = new BlueprintData(data.stack(), remaining, completed);
+        BlueprintData newData = new BlueprintData(data.result(), remaining, completed);
         copy.set(WmcDataComponentTypes.BLUEPRINT.get(), newData);
 
         return copy;

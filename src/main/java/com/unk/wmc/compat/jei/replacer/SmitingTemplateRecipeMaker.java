@@ -33,15 +33,15 @@ public class SmitingTemplateRecipeMaker {
         if (BuiltInRegistries.ITEM.getTag(WmcItemTags.SMITHING_TEMPLATES).isEmpty()) return recipeHolders;
 
         for (Holder<Item> itemHolder : BuiltInRegistries.ITEM.getTag(WmcItemTags.SMITHING_TEMPLATES).get()) {
-            Item item = itemHolder.value();
+            Item itemContained = itemHolder.value();
 
             ItemStack core = WmcItems.SMITHING_TEMPLATE_CORE.get().getDefaultInstance();
-            core.set(WmcDataComponentTypes.SIMPLE_ITEM_STACK, new SimpleItemStackData(item.getDefaultInstance()));
+            core.set(WmcDataComponentTypes.SIMPLE_ITEM_STACK, new SimpleItemStackData(itemContained.getDefaultInstance()));
 
             Ingredient coreIngredient = DataComponentIngredient.of(false, core);
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "jei.smithing_core." + item.getDescriptionId());
+            ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "jei.smithing_core." + itemContained.getDescriptionId());
 
-            CraftingRecipe recipe = vanillaRecipeFactory.createShapedRecipeBuilder(CraftingBookCategory.MISC, List.of(item.getDefaultInstance()))
+            CraftingRecipe recipe = vanillaRecipeFactory.createShapedRecipeBuilder(CraftingBookCategory.MISC, List.of(itemContained.getDefaultInstance()))
                     .group(group)
                     .pattern("ada")
                     .pattern("aea")
@@ -50,7 +50,7 @@ public class SmitingTemplateRecipeMaker {
                     .define('d', coreIngredient)
                     .define('e', Ingredient.of(WmcItems.EMPTY_SMITING_TEMPLATE))
                     .build();
-            recipeHolders.add(new RecipeHolder<>(id, recipe));
+            recipeHolders.add(new RecipeHolder<>(recipeId, recipe));
         }
 
         return recipeHolders;

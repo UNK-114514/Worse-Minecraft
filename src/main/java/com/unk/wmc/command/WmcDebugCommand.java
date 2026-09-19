@@ -80,7 +80,7 @@ public class WmcDebugCommand {
 
                                     optionalTag.ifPresent(holders -> {
                                         for (var holder : holders) {
-                                            builder.addStep(holder.value());
+                                            builder.addStep(holder.value().getDefaultInstance());
                                         }
                                     });
 

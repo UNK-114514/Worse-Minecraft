@@ -25,10 +25,10 @@ public class SmithingTemplateDustItem extends Item {
 
         if (activatableData == null || simpleItemStackData == null) return;
 
-        Item item = simpleItemStackData.stack().getItem();
+        ItemStack containedStack = simpleItemStackData.stack();
 
-        if (!(item instanceof SmithingTemplateItem template)) {
-            ComponentHelper.addItemTooltip(item.getDefaultInstance(), tooltipContext, components, tooltipFlag);
+        if (!(containedStack.getItem() instanceof SmithingTemplateItem template)) {
+            ComponentHelper.addTooltip(containedStack, tooltipContext, components, tooltipFlag);
             return;
         }
 

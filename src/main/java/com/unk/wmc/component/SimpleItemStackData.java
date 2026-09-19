@@ -19,8 +19,8 @@ public record SimpleItemStackData(ItemStack stack) {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof SimpleItemStackData(ItemStack itemStack))) return false;
-        return ItemStack.matches(this.stack, itemStack);
+        if (!(obj instanceof SimpleItemStackData(ItemStack objContains))) return false;
+        return ItemStack.matches(stack, objContains);
     }
 
     @Override

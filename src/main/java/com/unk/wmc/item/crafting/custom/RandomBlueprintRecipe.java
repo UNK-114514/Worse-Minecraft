@@ -1,28 +1,42 @@
 package com.unk.wmc.item.crafting.custom;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.unk.wmc.component.BlueprintData;
+import com.unk.wmc.component.WmcDataComponentTypes;
+import com.unk.wmc.item.WmcItems;
+import com.unk.wmc.item.crafting.WmcRecipeSerializers;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.Item;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public record RandomBlueprintRecipe(
-        ShapedRecipePattern pattern, ItemStack result,
-        Item resultContains, CraftingBookCategory category, int count) implements CraftingRecipe {
+        ShapedRecipePattern pattern, ItemStack resultContains,
+        CraftingBookCategory craftingBookCategory, int randomItemCount) implements CraftingRecipe {
     @Override
     public @NotNull CraftingBookCategory category() {
-        return category;
+        return craftingBookCategory;
     }
 
     @Override
     public boolean matches(@NotNull CraftingInput craftingInput, @NotNull Level level) {
-        return false;
+        return this.pattern.matches(craftingInput);
     }
 
     @Override
-    public ItemStack assemble(@NotNull CraftingInput craftingInput, HolderLookup.@NotNull Provider provider) {
-        return null;
+    public @NotNull ItemStack assemble(@NotNull CraftingInput craftingInput, HolderLookup.@NotNull Provider provider) {
+        ItemStack resultStack = WmcItems.RANDOM_BLUEPRINT.get().getDefaultInstance();
+        BlueprintData.BlueprintComponentBuilder builder =
+                new BlueprintData.BlueprintComponentBuilder(resultContains);
+
+        resultStack.set(WmcDataComponentTypes.BLUEPRINT, builder.getRandom(randomItemCount));
+        return resultStack;
     }
 
     @Override
@@ -31,33 +45,43 @@ public record RandomBlueprintRecipe(
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.@NotNull Provider provider) {
-        return null;
+    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider provider) {
+        return WmcItems.RANDOM_BLUEPRINT.get().getDefaultInstance();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
-        return null;
+    public @NotNull RecipeSerializer<?> getSerializer() {
+        return WmcRecipeSerializers.RANDOM_BLUEPRINT.get();
     }
 
-//    public static class RandomBlueprintRecipeSerializer implements RecipeSerializer<RandomBlueprintRecipe> {
-//        Codec<RandomBlueprintRecipe> CODEC = RecordCodecBuilder.create(inst -> {
-//            inst.group(
-//                    ShapedRecipePattern.MAP_CODEC.forGetter(RandomBlueprintRecipe::pattern),
-//                    ItemStack.STRICT_CODEC.fieldOf("result").forGetter(RandomBlueprintRecipe::result),
-//                    ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result_contains").forGetter((recipe) -> recipe.resultContains.getDefaultInstance())
-//            )
-//        })
-//
-//
-//        @Override
-//        public MapCodec<RandomBlueprintRecipe> codec() {
-//            return null;
-//        }
-//
-//        @Override
-//        public StreamCodec<RegistryFriendlyByteBuf, RandomBlueprintRecipe> streamCodec() {
-//            return null;
-//        }
-//    }
+    public static class Serializer implements RecipeSerializer<RandomBlueprintRecipe> {
+        public static final MapCodec<RandomBlueprintRecipe> CODEC =
+                RecordCodecBuilder.mapCodec(
+                        inst -> inst.group(
+                                ShapedRecipePattern.MAP_CODEC.forGetter(RandomBlueprintRecipe::pattern),
+                                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result_contains").forGetter(RandomBlueprintRecipe::resultContains),
+                                CraftingBookCategory.CODEC.fieldOf("category").forGetter(RandomBlueprintRecipe::category),
+                                Codec.INT.fieldOf("random_item_count").forGetter(RandomBlueprintRecipe::randomItemCount)
+                        ).apply(inst, RandomBlueprintRecipe::new)
+                );
+
+        public static StreamCodec<RegistryFriendlyByteBuf, RandomBlueprintRecipe> STREAM_CODEC =
+                StreamCodec.composite(
+                        ShapedRecipePattern.STREAM_CODEC, RandomBlueprintRecipe::pattern,
+                        ItemStack.STREAM_CODEC, RandomBlueprintRecipe::resultContains,
+                        CraftingBookCategory.STREAM_CODEC, RandomBlueprintRecipe::craftingBookCategory,
+                        ByteBufCodecs.INT, RandomBlueprintRecipe::randomItemCount,
+                        RandomBlueprintRecipe::new
+                );
+
+        @Override
+        public @NotNull MapCodec<RandomBlueprintRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, RandomBlueprintRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
+    }
 }

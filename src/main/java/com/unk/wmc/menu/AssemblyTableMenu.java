@@ -11,7 +11,6 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.ItemCombinerMenuSlotDefinition;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
@@ -58,9 +57,9 @@ public class AssemblyTableMenu extends ItemCombinerMenu {
         if (blueprintData == null) return;
         if (blueprintData.remainingSteps().isEmpty()) return;
 
-        Item requiredItem = blueprintData.remainingSteps().getFirst().getItem();
+        ItemStack requiredStack = blueprintData.remainingSteps().getFirst();
 
-        if (requiredItem == slot0.getItem()) {
+        if (ItemStack.isSameItemSameComponents(requiredStack, slot0)) {
             this.resultSlots.setItem(2, ItemStackHelper.doNextStep(slot1));
         }
     }

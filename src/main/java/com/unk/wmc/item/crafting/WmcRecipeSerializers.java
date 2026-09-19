@@ -2,6 +2,7 @@ package com.unk.wmc.item.crafting;
 
 import com.unk.wmc.Wmc;
 import com.unk.wmc.item.crafting.custom.AltarCraftingRecipe;
+import com.unk.wmc.item.crafting.custom.RandomBlueprintRecipe;
 import com.unk.wmc.item.crafting.custom.SmithingTemplateRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,4 +18,7 @@ public class WmcRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<SmithingTemplateRecipe>> SMITHING_TEMPLATE_FROM_CORE =
             SERIALIZERS.register("crafting_special_smithing_template", () -> new SimpleCraftingRecipeSerializer<>(SmithingTemplateRecipe::new));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RandomBlueprintRecipe>> RANDOM_BLUEPRINT =
+            SERIALIZERS.register("random_blueprint", RandomBlueprintRecipe.Serializer::new);
 }
