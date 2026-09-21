@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface MultiAbility {
+public interface IMultiAbilityItem {
     List<IItemAbility> getAbilities();
 
     void initializeAbilities();

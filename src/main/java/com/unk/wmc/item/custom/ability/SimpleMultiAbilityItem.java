@@ -11,11 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SimpleMultiAbilityItem extends Item implements MultiAbility {
+public abstract class SimpleMultiAbilityItem extends Item implements IMultiAbilityItem {
     private static final List<IItemAbility> abilities = new ArrayList<>();
 
     public SimpleMultiAbilityItem(Properties properties) {
         super(properties);
+        initializeAbilities();
     }
 
     public List<IItemAbility> getAbilities() {

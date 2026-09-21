@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated(forRemoval = true)
+@Deprecated()
 @SuppressWarnings("UnusedReturnValue")
 public abstract class MultiAbilityItem extends Item {
     private final List<IItemAbility> abilities = new ArrayList<>();

@@ -2,7 +2,7 @@ package com.unk.wmc.network;
 
 import com.unk.wmc.Wmc;
 import com.unk.wmc.item.custom.ability.IItemAbility;
-import com.unk.wmc.item.custom.ability.MultiAbilityItem;
+import com.unk.wmc.item.custom.ability.IMultiAbilityItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -25,7 +25,7 @@ public record C2SAbilitySwitchingPayload(int action) implements CustomPacketPayl
 
     public static void handle(C2SAbilitySwitchingPayload payload, IPayloadContext context) {
         ItemStack stack = context.player().getMainHandItem();
-        if (!(stack.getItem() instanceof MultiAbilityItem multi)) return;
+        if (!(stack.getItem() instanceof IMultiAbilityItem multi)) return;
 
         if (payload.action() >= 0) {
             multi.switchAbility(stack, payload.action(), context.player());

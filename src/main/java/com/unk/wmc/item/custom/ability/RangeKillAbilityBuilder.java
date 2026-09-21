@@ -1,5 +1,6 @@
 package com.unk.wmc.item.custom.ability;
 
+import com.unk.wmc.helper.EntityHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -32,8 +33,10 @@ public record RangeKillAbilityBuilder(
                         e -> e != player
                 );
 
-                targets.forEach(Entity::kill);
-                player.getCooldowns().addCooldown(stack.getItem(), cooldown);
+                EntityHelper.killAll(targets, player);
+                if (cooldown >= 0) {
+                    player.getCooldowns().addCooldown(stack.getItem(), cooldown);
+                }
             }
 
             @Override

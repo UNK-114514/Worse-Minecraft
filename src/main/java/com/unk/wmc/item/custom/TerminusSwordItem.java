@@ -1,12 +1,15 @@
 package com.unk.wmc.item.custom;
 
-import com.unk.wmc.item.custom.ability.MultiAbilityItem;
+import com.unk.wmc.helper.EntityHelper;
+import com.unk.wmc.item.custom.ability.MarkingAbilityBuilder;
 import com.unk.wmc.item.custom.ability.RangeKillAbilityBuilder;
 import com.unk.wmc.item.custom.ability.SimpleAbility;
+import com.unk.wmc.item.custom.ability.SimpleMultiAbilityItem;
 import com.unk.wmc.util.RainbowComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -14,7 +17,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class TerminusSwordItem extends MultiAbilityItem {
+import java.util.List;
+
+public class TerminusSwordItem extends SimpleMultiAbilityItem {
     private static final String NAME = "Terminus Sword";
 
     public TerminusSwordItem(Properties properties) {
@@ -26,7 +31,7 @@ public class TerminusSwordItem extends MultiAbilityItem {
         addAbility(
                 RangeKillAbilityBuilder.of(
                         128,
-                        100,
+                        10,
                         Component.literal("Range Kill (All Entity)"),
                         Component.literal("Kill every entity in 128 blocks").withStyle(ChatFormatting.GRAY),
                         Entity.class
@@ -36,7 +41,7 @@ public class TerminusSwordItem extends MultiAbilityItem {
         addAbility(
                 RangeKillAbilityBuilder.of(
                         128,
-                        100,
+                        10,
                         Component.literal("Range Kill (All Living)"),
                         Component.literal("Kill every living entity in 128 blocks").withStyle(ChatFormatting.GRAY),
                         LivingEntity.class
@@ -46,7 +51,7 @@ public class TerminusSwordItem extends MultiAbilityItem {
         addAbility(
                 RangeKillAbilityBuilder.of(
                         128,
-                        100,
+                        10,
                         Component.literal("Range Kill (All Monster)"),
                         Component.literal("Kill every monster in 128 blocks").withStyle(ChatFormatting.GRAY),
                         Monster.class
@@ -56,12 +61,18 @@ public class TerminusSwordItem extends MultiAbilityItem {
         addAbility(
                 RangeKillAbilityBuilder.of(
                         128,
-                        100,
+                        -1,
                         Component.literal("Range Kill (All Item)"),
                         Component.literal("Kill every item entity in 128 blocks").withStyle(ChatFormatting.GRAY),
                         ItemEntity.class
-                )
-                .build()
+                ).build()
+        );
+
+        addAbility(
+                MarkingAbilityBuilder.of(
+                        Component.literal("Range Kill (Attacked Entity)"),
+                        Component.literal("Kill all the entity of the same type as the ones you attacked")
+                ).build()
         );
 
         addAbility(SimpleAbility.EMPTY);
@@ -69,14 +80,19 @@ public class TerminusSwordItem extends MultiAbilityItem {
 
     @Override
     public boolean onLeftClickEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull Entity entity) {
-        if (!(entity instanceof LivingEntity living)) return false;
+        if (getSelectedIndex(stack) == 4) {
+            EntityType<?> type = entity.getType();
+            List<? extends Entity> entities = player.level().getEntitiesOfClass(
+                    Entity.class,
+                    player.getBoundingBox().inflate(128),
+                    e -> e.getType() == type
+            );
 
-        living.hurt(player.damageSources().genericKill(), Float.MAX_VALUE);
-
-        if (living.isAlive()) {
-            living.setHealth(0F);
-            living.die(player.damageSources().genericKill());
+            EntityHelper.killAll(entities, player);
+            return true;
         }
+
+        EntityHelper.kill(entity, player);
         return true;
     }
 
