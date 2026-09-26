@@ -14,6 +14,10 @@ public interface IMultiAbilityItem {
 
     void initializeAbilities();
 
+    default void addAbility(IItemAbility ability) {
+        getAbilities().add(ability);
+    }
+
     default int getSelectedIndex(ItemStack stack) {
         return stack.getOrDefault(WmcDataComponentTypes.ABILITY, 0);
     }
@@ -52,7 +56,7 @@ public interface IMultiAbilityItem {
         if (ability != null) {
             return ability.getAbilityDescription();
         }
-        return Component.empty();
+        return null;
     }
 
     default @NotNull Component getSelectedName(ItemStack stack) {

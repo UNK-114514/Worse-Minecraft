@@ -4,11 +4,11 @@ import com.unk.wmc.Wmc;
 import com.unk.wmc.block.custom.ActivateAltarBlock;
 import com.unk.wmc.block.custom.ActivatePedestalBlock;
 import com.unk.wmc.block.custom.AssemblyTableBlock;
+import com.unk.wmc.item.WmcItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.unk.wmc.item.WmcItems;
 
 import java.util.function.Supplier;
 

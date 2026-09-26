@@ -21,6 +21,13 @@ public record AltarCraftingRecipe(ItemStack n, ItemStack en, ItemStack e, ItemSt
                                   ItemStack result) implements Recipe<AltarCraftingRecipeInput> {
     @Override
     public boolean matches(AltarCraftingRecipeInput input, @NotNull Level level) {
+        return matchStrict(input.rotate(0))
+                || matchStrict(input.rotate(1))
+                || matchStrict(input.rotate(2))
+                || matchStrict(input.rotate(3));
+    }
+
+    private boolean matchStrict(AltarCraftingRecipeInput input) {
         return ItemStack.isSameItemSameComponents(n, input.getItem(0))
                 && ItemStack.isSameItemSameComponents(en, input.getItem(1))
                 && ItemStack.isSameItemSameComponents(e, input.getItem(2))

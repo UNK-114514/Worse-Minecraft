@@ -29,7 +29,7 @@ displayURL = "unk-114514.github.io" #optional
 # A text field displayed in the mod UI
 #credits="" #optional
 # A text field displayed in the mod UI
-authors = "UNK_114514" #optional
+authors = "UNK_114514, Chazi" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description = '''Make Minecraft Worse Again!'''

@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public record MarkingAbilityBuilder(Component name, Component description) {
+public record MarkingAbilityBuilder(@NotNull Component name, @Nullable Component description) {
     public static MarkingAbilityBuilder of(Component name, Component description) {
         return new MarkingAbilityBuilder(name, description);
     }

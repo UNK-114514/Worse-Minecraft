@@ -1,10 +1,7 @@
 package com.unk.wmc.item.custom;
 
 import com.unk.wmc.helper.EntityHelper;
-import com.unk.wmc.item.custom.ability.MarkingAbilityBuilder;
-import com.unk.wmc.item.custom.ability.RangeKillAbilityBuilder;
-import com.unk.wmc.item.custom.ability.SimpleAbility;
-import com.unk.wmc.item.custom.ability.SimpleMultiAbilityItem;
+import com.unk.wmc.item.custom.ability.*;
 import com.unk.wmc.util.RainbowComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -14,16 +11,25 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TerminusSwordItem extends SimpleMultiAbilityItem {
+public class TerminusSwordItem extends SwordItem implements IMultiAbilityItem, TerminusItem {
     private static final String NAME = "Terminus Sword";
+    private static final List<IItemAbility> abilities = new ArrayList<>();
 
-    public TerminusSwordItem(Properties properties) {
-        super(properties);
+    public TerminusSwordItem(Tier tier, Properties properties) {
+        super(tier, properties);
+        initializeAbilities();
+    }
+
+
+    @Override
+    public List<IItemAbility> getAbilities() {
+        return abilities;
     }
 
     @Override
@@ -71,7 +77,7 @@ public class TerminusSwordItem extends SimpleMultiAbilityItem {
         addAbility(
                 MarkingAbilityBuilder.of(
                         Component.literal("Range Kill (Attacked Entity)"),
-                        Component.literal("Kill all the entity of the same type as the ones you attacked")
+                        Component.literal("Kill all the entity of the same type as the ones you attacked").withStyle(ChatFormatting.GRAY)
                 ).build()
         );
 
@@ -98,6 +104,13 @@ public class TerminusSwordItem extends SimpleMultiAbilityItem {
 
     @Override
     public @NotNull Component getName(@NotNull ItemStack stack) {
-        return RainbowComponent.of(NAME, 0.75F, 1F, 0.01F);
+        return RainbowComponent.of(NAME);
+    }
+
+    @Override
+    public void appendHoverText(
+            @NotNull ItemStack stack, @NotNull Item.TooltipContext context,
+            @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
+        addTooltip(stack, components);
     }
 }

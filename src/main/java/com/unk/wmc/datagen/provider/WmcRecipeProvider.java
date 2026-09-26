@@ -23,7 +23,7 @@ public class WmcRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput output) {
-        AltarCraftingRecipeBuilder.of(RecipeCategory.MISC, Items.ECHO_SHARD, Items.EXPERIENCE_BOTTLE, ItemStackHelper.getDustOf(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, false), ItemStackHelper.getDustOf(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, true)).save(output, ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "activate_silence_armor_trim_smithing_template"));
+        AltarCraftingRecipeBuilder.of(RecipeCategory.MISC, Items.ECHO_SHARD, Items.EXPERIENCE_BOTTLE, ItemStackHelper.getDustOf(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, false), ItemStackHelper.getDustOf(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, true)).save(output, ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "activate_silence_armor_trim_smithing_template_dust"));
 
         RandomBlueprintRecipeBuilder.of(RecipeCategory.MISC, 128, WmcItems.RANDOM_CORE.get()).pattern("xxx").pattern("xnx").pattern("xxx").define('x', Items.PAPER).define('n', Blocks.NETHERITE_BLOCK).unlockedBy("has_item_netherite_block", has(Blocks.NETHERITE_BLOCK)).save(output, ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID, "random_128_contains_random_core"));
 

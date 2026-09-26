@@ -1,10 +1,12 @@
 package com.unk.wmc.item.crafting.custom;
 
+import com.unk.wmc.Wmc;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -134,6 +136,11 @@ public class AltarCraftingRecipeBuilder implements RecipeBuilder {
         AltarCraftingRecipe recipe = new AltarCraftingRecipe(n, en, e, es, s, ws, w, wn, mid, result);
 
         recipeOutput.accept(resourceLocation, recipe, builder.build(resourceLocation.withPrefix("recipes/")));
+    }
+
+    public void save(@NotNull RecipeOutput output) {
+        save(output, ResourceLocation.fromNamespaceAndPath(Wmc.MOD_ID,
+                "activate_" + BuiltInRegistries.ITEM.getKey(mid.getItem()).getPath()));
     }
 
     public @Nullable String getGroup() {

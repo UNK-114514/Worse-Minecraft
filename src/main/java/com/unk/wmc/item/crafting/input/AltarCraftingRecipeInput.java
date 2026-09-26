@@ -60,4 +60,18 @@ public record AltarCraftingRecipeInput(
                 && wn.isEmpty()
                 && mid.isEmpty();
     }
+
+    public AltarCraftingRecipeInput rotate(int times) {
+        return new AltarCraftingRecipeInput(
+                getItem((times * 2) % 8),
+                getItem((1 + times * 2) % 8),
+                getItem((2 + times * 2) % 8),
+                getItem((3 + times * 2) % 8),
+                getItem((4 + times * 2) % 8),
+                getItem((5 + times * 2) % 8),
+                getItem((6 + times * 2) % 8),
+                getItem((7 + times * 2) % 8),
+                mid
+        );
+    }
 }

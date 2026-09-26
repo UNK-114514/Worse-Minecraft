@@ -69,7 +69,7 @@ public abstract class MultiAbilityItem extends Item {
 
     public @Nullable Component getSelectedDescription(ItemStack stack) {
         IItemAbility ability = getSelectedAbility(stack);
-        if (ability != null) {
+        if (ability != null && ability.getAbilityDescription() != null) {
             return ability.getAbilityDescription();
         }
         return Component.empty();

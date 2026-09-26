@@ -23,10 +23,6 @@ public abstract class SimpleMultiAbilityItem extends Item implements IMultiAbili
         return abilities;
     }
 
-    public void addAbility(IItemAbility ability) {
-        getAbilities().add(ability);
-    }
-
     @Override
     public void appendHoverText(
             @NotNull ItemStack stack, @NotNull Item.TooltipContext context,

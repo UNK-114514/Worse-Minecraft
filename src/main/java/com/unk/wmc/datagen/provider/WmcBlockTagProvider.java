@@ -1,5 +1,6 @@
 package com.unk.wmc.datagen.provider;
 
+import com.unk.wmc.block.WmcBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -17,6 +18,6 @@ public class WmcBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-
+        tag(WmcBlockTags.EMPTY);
     }
 }

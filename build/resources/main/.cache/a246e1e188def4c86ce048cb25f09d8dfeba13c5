@@ -1,3 +1,16 @@
-// 1.21.1	2026-09-12T21:14:44.4555089	Item Models: wmc
+// 1.21.1	2026-09-25T20:50:58.5591621	Item Models: wmc
 34d53ceb44f68eb8d58c875ad953eb8d6f541959 assets/wmc/models/item/activate_altar.json
 2b866c032b2e70596c309fa32db2586be1c8ffcd assets/wmc/models/item/activate_pedestal.json
+b728c72bd40028d4d9d337bb971755ba736fcdc7 assets/wmc/models/item/blueprint.json
+bf9b41612c47b77cc48882f1b279e971234d6db3 assets/wmc/models/item/copper_cogwheel.json
+a7d2b891488d38b4147e4c678c9e286fe3fd0d96 assets/wmc/models/item/diamond_cogwheel.json
+afa9497a133a75975ca9ae2be969d577c4e3a16a assets/wmc/models/item/gold_cogwheel.json
+c008bafe51621d0c2600ab0b1a8369b6c49ad1a9 assets/wmc/models/item/iron_cogwheel.json
+98afa2e7a578e5157177a01b5a96f2d243b502a1 assets/wmc/models/item/netherite_cogwheel.json
+ab646973bcc91bdc7e9828c1ff5441cb4e9522a0 assets/wmc/models/item/random_blueprint.json
+b47f79908e156e05ef119ba9fc9d6b6800719d59 assets/wmc/models/item/terminus_axe.json
+1a16921db9f47585a8b85933a212b3b38d00dcad assets/wmc/models/item/terminus_hoe.json
+3e1190d2e3357aa1e89d9a1ad5eee0b75ecd74fd assets/wmc/models/item/terminus_ingot.json
+1eedd4fb27f06db9eefa2d27c87285cc9b217775 assets/wmc/models/item/terminus_pickaxe.json
+51263f8e6c300189a9c156f8ff8cfe0d6f644a48 assets/wmc/models/item/terminus_shovel.json
+aaaccc1d145fb56b9c8285728d985a2e709d5664 assets/wmc/models/item/terminus_sword.json

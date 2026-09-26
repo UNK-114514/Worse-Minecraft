@@ -39,6 +39,12 @@ public class WmcCreativeTabs {
                                 output.accept(WmcItems.TERMINUS_NUGGET);
                                 output.accept(WmcItems.TERMINUS_UPGRADE_SMITHING_TEMPLATE);
 
+                                output.accept(WmcItems.TERMINUS_SWORD);
+                                output.accept(WmcItems.TERMINUS_PICKAXE);
+                                output.accept(WmcItems.TERMINUS_AXE);
+                                output.accept(WmcItems.TERMINUS_SHOVEL);
+                                output.accept(WmcItems.TERMINUS_HOE);
+
                                 output.accept(WmcItems.COPPER_COGWHEEL);
                                 output.accept(WmcItems.IRON_COGWHEEL);
                                 output.accept(WmcItems.GOLD_COGWHEEL);

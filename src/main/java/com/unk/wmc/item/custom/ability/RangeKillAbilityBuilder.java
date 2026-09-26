@@ -27,6 +27,7 @@ public record RangeKillAbilityBuilder(
                 super.applyEffects(stack, player);
 
                 Level level = player.level();
+
                 List<? extends Entity> targets = level.getEntitiesOfClass(
                         entityClazz,
                         player.getBoundingBox().inflate(range),
