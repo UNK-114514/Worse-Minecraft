@@ -5,7 +5,9 @@ import com.unk.wmc.item.WmcItems;
 import com.unk.wmc.item.custom.TerminusAxeItem;
 import com.unk.wmc.item.custom.TerminusPickaxeItem;
 import com.unk.wmc.item.custom.TerminusShovelItem;
+import com.unk.wmc.item.custom.ability.IItemAbility;
 import com.unk.wmc.item.custom.ability.SimpleAbility;
+import com.unk.wmc.item.custom.ability.custom.WmcAbilities;
 import com.unk.wmc.util.VeinMiner;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -31,8 +33,13 @@ public class TerminusItemAbilityHandler {
         Level level = event.getPlayer().level();
         BlockPos pos = event.getPos();
 
+
         if (!(stack.getItem() instanceof TerminusAxeItem axe)) return;
-        if (axe.getSelectedIndex(stack) != 0) return;
+
+        IItemAbility ability = axe.getSelectedAbility(stack);
+
+        if (ability == null) return;
+        if (!ability.equals(WmcAbilities.TREE_BREAKER.get())) return;
         if (!level.getBlockState(pos).is(BlockTags.LOGS)) return;
 
         List<BlockPos> posList = VeinMiner.veinMineBFS(
@@ -56,7 +63,10 @@ public class TerminusItemAbilityHandler {
         BlockPos pos = event.getPos();
 
         if (!(stack.getItem() instanceof TerminusPickaxeItem pickaxe)) return;
-        if (pickaxe.getSelectedIndex(stack) != 0) return;
+        IItemAbility ability = pickaxe.getSelectedAbility(stack);
+
+        if (ability == null) return;
+        if (!ability.equals(WmcAbilities.VEIN_MINER.get())) return;
 
         List<BlockPos> posList = VeinMiner.veinMineBFS(
                 level,
@@ -96,9 +106,13 @@ public class TerminusItemAbilityHandler {
         BlockState state = level.getBlockState(pos);
 
         if (!(stack.getItem() instanceof TerminusPickaxeItem pickaxe)) return;
-        if (pickaxe.getSelectedIndex(stack) == 0) return;
 
-        if (pickaxe.getSelectedIndex(stack) == 1) {
+        IItemAbility ability = pickaxe.getSelectedAbility(stack);
+
+        if (ability == null) return;
+        if (ability.equals(WmcAbilities.VEIN_MINER.get())) return;
+
+        if (ability.equals(WmcAbilities.SUPER_SILK_TOUCH.get())) {
             Block.popResource(level, pos, state.getBlock().asItem().getDefaultInstance());
             level.destroyBlock(pos, false);
             return;

@@ -3,6 +3,7 @@ package com.unk.wmc.item;
 import com.unk.wmc.Wmc;
 import com.unk.wmc.item.custom.*;
 import com.unk.wmc.item.custom.tier.WmcTiers;
+import com.unk.wmc.util.HiddenItemAttributeModifierBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -36,11 +37,11 @@ public class WmcItems {
     public static final DeferredItem<Item> DIAMOND_COGWHEEL = ITEMS.register("diamond_cogwheel", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> NETHERITE_COGWHEEL = ITEMS.register("netherite_cogwheel", () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> TERMINUS_SWORD = ITEMS.register("terminus_sword", () -> new TerminusSwordItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> TERMINUS_PICKAXE = ITEMS.register("terminus_pickaxe", () -> new TerminusPickaxeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> TERMINUS_AXE = ITEMS.register("terminus_axe", () -> new TerminusAxeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> TERMINUS_SHOVEL = ITEMS.register("terminus_shovel", () -> new TerminusShovelItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> TERMINUS_HOE = ITEMS.register("terminus_hoe", () -> new TerminusHoeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> TERMINUS_SWORD = ITEMS.register("terminus_sword", () -> new TerminusSwordItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().attributes(HiddenItemAttributeModifierBuilder.GENERAL_TERMINUS_ATTR).component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> TERMINUS_PICKAXE = ITEMS.register("terminus_pickaxe", () -> new TerminusPickaxeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().attributes(HiddenItemAttributeModifierBuilder.GENERAL_TERMINUS_ATTR).component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> TERMINUS_AXE = ITEMS.register("terminus_axe", () -> new TerminusAxeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().attributes(HiddenItemAttributeModifierBuilder.GENERAL_TERMINUS_ATTR).component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> TERMINUS_SHOVEL = ITEMS.register("terminus_shovel", () -> new TerminusShovelItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().attributes(HiddenItemAttributeModifierBuilder.GENERAL_TERMINUS_ATTR).component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> TERMINUS_HOE = ITEMS.register("terminus_hoe", () -> new TerminusHoeItem(WmcTiers.TERMUNIUS_TIER, new Item.Properties().attributes(HiddenItemAttributeModifierBuilder.GENERAL_TERMINUS_ATTR).component(DataComponents.UNBREAKABLE, new Unbreakable(true)).fireResistant().rarity(Rarity.EPIC)));
 
     public static final DeferredItem<Item> TERMINUS_UPGRADE_SMITHING_TEMPLATE =
             ITEMS.register("terminus_upgrade_smithing_template", () -> new SmithingTemplateItem(

@@ -1,15 +1,13 @@
 package com.unk.wmc.item.custom;
 
 import com.unk.wmc.helper.EntityHelper;
-import com.unk.wmc.item.custom.ability.*;
+import com.unk.wmc.item.custom.ability.IItemAbility;
+import com.unk.wmc.item.custom.ability.IMultiAbilityItem;
+import com.unk.wmc.item.custom.ability.custom.WmcAbilities;
 import com.unk.wmc.util.RainbowComponent;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
@@ -20,73 +18,35 @@ import java.util.List;
 public class TerminusSwordItem extends SwordItem implements IMultiAbilityItem, TerminusItem {
     private static final String NAME = "Terminus Sword";
     private static final List<IItemAbility> abilities = new ArrayList<>();
+    private static boolean initialized = false;
 
     public TerminusSwordItem(Tier tier, Properties properties) {
         super(tier, properties);
-        initializeAbilities();
     }
-
 
     @Override
     public List<IItemAbility> getAbilities() {
+        if (!initialized) {
+            initialized = true;
+            initializeAbilities();
+        }
         return abilities;
     }
 
     @Override
     public void initializeAbilities() {
-        addAbility(
-                RangeKillAbilityBuilder.of(
-                        128,
-                        10,
-                        Component.literal("Range Kill (All Entity)"),
-                        Component.literal("Kill every entity in 128 blocks").withStyle(ChatFormatting.GRAY),
-                        Entity.class
-                ).build()
-        );
-
-        addAbility(
-                RangeKillAbilityBuilder.of(
-                        128,
-                        10,
-                        Component.literal("Range Kill (All Living)"),
-                        Component.literal("Kill every living entity in 128 blocks").withStyle(ChatFormatting.GRAY),
-                        LivingEntity.class
-                ).build()
-        );
-
-        addAbility(
-                RangeKillAbilityBuilder.of(
-                        128,
-                        10,
-                        Component.literal("Range Kill (All Monster)"),
-                        Component.literal("Kill every monster in 128 blocks").withStyle(ChatFormatting.GRAY),
-                        Monster.class
-                ).build()
-        );
-
-        addAbility(
-                RangeKillAbilityBuilder.of(
-                        128,
-                        -1,
-                        Component.literal("Range Kill (All Item)"),
-                        Component.literal("Kill every item entity in 128 blocks").withStyle(ChatFormatting.GRAY),
-                        ItemEntity.class
-                ).build()
-        );
-
-        addAbility(
-                MarkingAbilityBuilder.of(
-                        Component.literal("Range Kill (Attacked Entity)"),
-                        Component.literal("Kill all the entity of the same type as the ones you attacked").withStyle(ChatFormatting.GRAY)
-                ).build()
-        );
-
-        addAbility(SimpleAbility.EMPTY);
+        addAbility(WmcAbilities.RANGE_KILL_ALL_ENTITY.get());
+        addAbility(WmcAbilities.RANGE_KILL_ALL_LIVING.get());
+        addAbility(WmcAbilities.RANGE_KILL_ALL_MONSTER.get());
+        addAbility(WmcAbilities.RANGE_KILL_ALL_ITEM.get());
+        addAbility(WmcAbilities.RANGE_KILL_ATTACKED_ENTITY.get());
+        addAbility(WmcAbilities.EMPTY.get());
     }
 
     @Override
     public boolean onLeftClickEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull Entity entity) {
-        if (getSelectedIndex(stack) == 4) {
+        IItemAbility selected = getSelectedAbility(stack);
+        if (selected != null && selected.equals(WmcAbilities.RANGE_KILL_ATTACKED_ENTITY.get())) {
             EntityType<?> type = entity.getType();
             List<? extends Entity> entities = player.level().getEntitiesOfClass(
                     Entity.class,

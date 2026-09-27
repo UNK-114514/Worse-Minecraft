@@ -3,10 +3,8 @@ package com.unk.wmc.item.custom;
 import com.unk.wmc.helper.EntityHelper;
 import com.unk.wmc.item.custom.ability.IItemAbility;
 import com.unk.wmc.item.custom.ability.IMultiAbilityItem;
-import com.unk.wmc.item.custom.ability.MarkingAbilityBuilder;
-import com.unk.wmc.item.custom.ability.SimpleAbility;
+import com.unk.wmc.item.custom.ability.custom.WmcAbilities;
 import com.unk.wmc.util.RainbowComponent;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,27 +17,25 @@ import java.util.List;
 public class TerminusAxeItem extends AxeItem implements IMultiAbilityItem, TerminusItem {
     private static final String NAME = "Terminus Axe";
     private static final List<IItemAbility> abilities = new ArrayList<>();
+    private static boolean initialized = false;
 
     public TerminusAxeItem(Tier tier, Properties properties) {
         super(tier, properties);
-        initializeAbilities();
     }
 
     @Override
     public List<IItemAbility> getAbilities() {
+        if (!initialized) {
+            initialized = true;
+            initializeAbilities();
+        }
         return abilities;
     }
 
     @Override
     public void initializeAbilities() {
-        addAbility(
-                MarkingAbilityBuilder.of(
-                        Component.literal("Tree Breaker"),
-                        Component.literal("Destroy All The Trees").withStyle(ChatFormatting.GRAY)
-                ).build()
-        );
-
-        addAbility(SimpleAbility.EMPTY);
+        addAbility(WmcAbilities.TREE_BREAKER.get());
+        addAbility(WmcAbilities.EMPTY.get());
     }
 
     @Override

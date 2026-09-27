@@ -3,17 +3,13 @@ package com.unk.wmc.item.custom;
 import com.unk.wmc.helper.EntityHelper;
 import com.unk.wmc.item.custom.ability.IItemAbility;
 import com.unk.wmc.item.custom.ability.IMultiAbilityItem;
-import com.unk.wmc.item.custom.ability.MarkingAbilityBuilder;
-import com.unk.wmc.item.custom.ability.SimpleAbility;
+import com.unk.wmc.item.custom.ability.custom.WmcAbilities;
 import com.unk.wmc.util.RainbowComponent;
-import com.unk.wmc.util.VeinMiner;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,55 +17,26 @@ import java.util.List;
 public class TerminusShovelItem extends ShovelItem implements IMultiAbilityItem, TerminusItem {
     private static final String NAME = "Terminus Shovel";
     private static final List<IItemAbility> abilities = new ArrayList<>();
+    private static boolean initialized = false;
 
     public TerminusShovelItem(Tier tier, Properties properties) {
         super(tier, properties);
-        initializeAbilities();
     }
 
     @Override
     public List<IItemAbility> getAbilities() {
+        if (!initialized) {
+            initialized = true;
+            initializeAbilities();
+        }
         return abilities;
     }
 
     @Override
     public void initializeAbilities() {
-        addAbility(new SimpleAbility() {
-            @Override
-            public void trigger(ItemStack stack, Player player) {
-                List<BlockPos> targets = VeinMiner.veinMineBFS(
-                        player.level(),
-                        player.blockPosition(),
-                        16384,
-                        (target) -> target.getY() >= player.blockPosition().getY()
-                );
-                VeinMiner.mineAll(targets, player.level(), 128, player, 0);
-            }
-
-            @Override
-            public boolean canTriggerByHotKey() {
-                return true;
-            }
-
-            @Override
-            public @Nullable Component getAbilityDescription() {
-                return Component.literal("Destroy blocks that higher than you");
-            }
-
-            @Override
-            public @NotNull Component getAbilityName() {
-                return Component.literal("Terrain Cleaner");
-            }
-        });
-
-        addAbility(
-                new MarkingAbilityBuilder(
-                        Component.literal("Gravity Changer"),
-                        Component.literal("Change Entity's Gravity")
-                ).build()
-        );
-
-        addAbility(SimpleAbility.EMPTY);
+        addAbility(WmcAbilities.TERRAIN_CLEANER.get());
+        addAbility(WmcAbilities.GRAVITY_CHANGER.get());
+        addAbility(WmcAbilities.EMPTY.get());
     }
 
     @Override
