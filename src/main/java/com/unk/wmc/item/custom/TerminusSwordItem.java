@@ -3,6 +3,7 @@ package com.unk.wmc.item.custom;
 import com.unk.wmc.helper.EntityHelper;
 import com.unk.wmc.item.custom.ability.IItemAbility;
 import com.unk.wmc.item.custom.ability.IMultiAbilityItem;
+import com.unk.wmc.item.custom.ability.SimpleAbility;
 import com.unk.wmc.item.custom.ability.custom.WmcAbilities;
 import com.unk.wmc.util.RainbowComponent;
 import net.minecraft.network.chat.Component;
@@ -53,6 +54,9 @@ public class TerminusSwordItem extends SwordItem implements IMultiAbilityItem, T
                     player.getBoundingBox().inflate(128),
                     e -> e.getType() == type
             );
+
+            SimpleAbility.applyUsedEffect(stack, player);
+            player.getCooldowns().addCooldown(stack.getItem(), 10);
 
             EntityHelper.killAll(entities, player);
             return true;

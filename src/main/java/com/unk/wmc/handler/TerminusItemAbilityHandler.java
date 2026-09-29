@@ -33,6 +33,7 @@ public class TerminusItemAbilityHandler {
         Level level = event.getPlayer().level();
         BlockPos pos = event.getPos();
 
+        if (event.getPlayer().getCooldowns().isOnCooldown(stack.getItem())) return;
 
         if (!(stack.getItem() instanceof TerminusAxeItem axe)) return;
 
@@ -54,6 +55,7 @@ public class TerminusItemAbilityHandler {
         VeinMiner.mineAll(posList, level, 64, event.getPlayer(), 5);
 
         event.getPlayer().getCooldowns().addCooldown(stack.getItem(), 200);
+        SimpleAbility.applyUsedEffect(stack, event.getPlayer());
     }
 
     @SubscribeEvent
@@ -61,6 +63,8 @@ public class TerminusItemAbilityHandler {
         ItemStack stack = event.getPlayer().getMainHandItem();
         Level level = event.getPlayer().level();
         BlockPos pos = event.getPos();
+
+        if (event.getPlayer().getCooldowns().isOnCooldown(stack.getItem())) return;
 
         if (!(stack.getItem() instanceof TerminusPickaxeItem pickaxe)) return;
         IItemAbility ability = pickaxe.getSelectedAbility(stack);
@@ -77,13 +81,16 @@ public class TerminusItemAbilityHandler {
 
         VeinMiner.mineAll(posList, level, 64, event.getPlayer(), 1);
 
-        event.getPlayer().getCooldowns().addCooldown(stack.getItem(), 200);
+        event.getPlayer().getCooldowns().addCooldown(stack.getItem(), 40);
         SimpleAbility.applyUsedEffect(stack, event.getPlayer());
     }
 
     @SubscribeEvent
     public static void onShovelUseOnEntity(PlayerInteractEvent.EntityInteract event) {
         Player player = event.getEntity();
+
+        if (player.getCooldowns().isOnCooldown(event.getItemStack().getItem())) return;
+
         Entity interacted = event.getTarget();
 
         if (!(player.getMainHandItem().getItem() instanceof TerminusShovelItem shovel)) return;
@@ -98,6 +105,9 @@ public class TerminusItemAbilityHandler {
     @SubscribeEvent
     public static void onPickaxeLeftClickingBlock(PlayerInteractEvent.LeftClickBlock event) {
         ItemStack stack = event.getEntity().getMainHandItem();
+
+        if (event.getEntity().getCooldowns().isOnCooldown(stack.getItem())) return;
+
         Level level = event.getEntity().level();
 
         if (level.isClientSide) return;

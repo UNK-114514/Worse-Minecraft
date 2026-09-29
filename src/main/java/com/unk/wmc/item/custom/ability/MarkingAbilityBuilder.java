@@ -15,7 +15,7 @@ public record MarkingAbilityBuilder(@NotNull Component name, @Nullable Component
         return new SimpleAbility() {
             @Override
             public void applyEffects(ItemStack stack, Player player) {
-
+                super.applyEffects(stack, player);
             }
 
             @Override

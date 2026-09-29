@@ -31,6 +31,29 @@ public record BlueprintData(
             BlueprintData::new
     );
 
+    private static boolean isSameItemList(List<ItemStack> a, List<ItemStack> b) {
+        if (a.size() != b.size()) return false;
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i).getItem() != b.get(i).getItem()) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof
+                BlueprintData(
+                        ItemStack dataResult,
+                        List<ItemStack> dataRemaining,
+                        List<ItemStack> dataCompleted
+                )
+        )) return false;
+
+        return ItemStack.isSameItemSameComponents(dataResult, result)
+                && isSameItemList(dataRemaining, remainingSteps)
+                && isSameItemList(dataCompleted, completedSteps);
+    }
+
     public static class BlueprintComponentBuilder {
         private final LinkedList<ItemStack> remainingSteps = new LinkedList<>();
         private final LinkedList<ItemStack> completedSteps = new LinkedList<>();

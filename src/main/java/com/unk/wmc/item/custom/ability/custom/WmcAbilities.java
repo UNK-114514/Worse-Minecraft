@@ -197,7 +197,7 @@ public class WmcAbilities {
 
                         @Override
                         public @Nullable Component getAbilityDescription() {
-                            return Component.literal("Kill everything");
+                            return Component.literal("Kill everything").withStyle(ChatFormatting.GRAY);
                         }
                     });
 
@@ -205,7 +205,9 @@ public class WmcAbilities {
             ITEM_ABILITIES.register("terrain_cleaner",
                     () -> new SimpleAbility() {
                         @Override
-                        public void trigger(ItemStack stack, Player player) {
+                        public void applyEffects (ItemStack stack, Player player) {
+                            super.applyEffects(stack, player);
+
                             List<BlockPos> targets = VeinMiner.veinMineBFS(
                                     player.level(),
                                     player.blockPosition(),
@@ -213,6 +215,8 @@ public class WmcAbilities {
                                     (target) -> target.getY() >= player.blockPosition().getY()
                             );
                             VeinMiner.mineAll(targets, player.level(), 128, player, 0);
+                            SimpleAbility.applyUsedEffect(stack, player);
+                            player.getCooldowns().addCooldown(stack.getItem(), 200);
                         }
 
                         @Override
@@ -222,7 +226,7 @@ public class WmcAbilities {
 
                         @Override
                         public @Nullable Component getAbilityDescription() {
-                            return Component.literal("Destroy blocks that higher than you");
+                            return Component.literal("Destroy blocks that higher than you").withStyle(ChatFormatting.GRAY);
                         }
 
                         @Override
@@ -235,7 +239,7 @@ public class WmcAbilities {
             ITEM_ABILITIES.register("gravity_changer",
                     () -> new MarkingAbilityBuilder(
                             Component.literal("Gravity Changer"),
-                            Component.literal("Change Entity's Gravity")
+                            Component.literal("Change entity's gravity").withStyle(ChatFormatting.GRAY)
                     ).build()
             );
 }

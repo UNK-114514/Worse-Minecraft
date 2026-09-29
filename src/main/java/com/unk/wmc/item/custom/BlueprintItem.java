@@ -1,5 +1,6 @@
 package com.unk.wmc.item.custom;
 
+import com.unk.wmc.Wmc;
 import com.unk.wmc.component.BlueprintData;
 import com.unk.wmc.component.WmcDataComponentTypes;
 import com.unk.wmc.helper.ComponentHelper;
@@ -24,6 +25,12 @@ public class BlueprintItem extends Item {
             @NotNull ItemStack stack, @NotNull TooltipContext tooltipContext,
             @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         BlueprintData blueprintData = stack.get(WmcDataComponentTypes.BLUEPRINT);
+
+        Wmc.LOGGER.info("[Blueprint] side={} stack={} count={} data={}",
+                stack.isEmpty() ? "client" : "unknown",
+                stack.getItem(),
+                stack.getCount(),
+                blueprintData);
 
         if (blueprintData == null) return;
 

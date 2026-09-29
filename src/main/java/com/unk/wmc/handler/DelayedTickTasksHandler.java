@@ -5,6 +5,8 @@ import com.unk.wmc.util.DelayedTickTask;
 import net.minecraft.server.MinecraftServer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.ArrayList;
@@ -28,7 +30,21 @@ public class DelayedTickTasksHandler {
         });
 
         for (DelayedTickTask.Task task : toRun) {
-            task.action().run();
+            try {
+                task.action().run();
+            } catch (Throwable throwable) {
+                Wmc.LOGGER.error("Fail to run delayed task: ", throwable);
+            }
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        DelayedTickTask.TASKS.clear();
+    }
+
+    @SubscribeEvent
+    public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+        DelayedTickTask.TASKS.clear();
     }
 }
